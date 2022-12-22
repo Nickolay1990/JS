@@ -3,17 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 3.5</title>
+    <title>Task 4.1</title>
 </head>
-<body>
+<body>    
     <script>
-        console.log("Вычисление объема цилиндра");
-        let V;
-        const Pi = 3.14;
-        let r = 10;
-        let h = 20;
-        V = Pi * r * r * h;
-        console.log(V);
+        let name = "Иван";
+        let age = 25;
+        let company = "ITVDN";
+        let position = "Frontend Developer";
+
+        // инициализируйте переменную message
+        // значение должно быть создано с помощью шаблонной строки и с помощью конкатенации.
+        // строковое значение должно быть создано на основе значений переменных name, age, company, position
+        // Значение должно быть составлено по шаблону:
+        // Привет, меня зовут Иван. Мне 25 лет. Я работаю на должности Frontend Developer в компании ITVDN. 
+
+        let message = `Привет, меня зовут ${name}. Мне ${age} лет. Я работаю на должности ${position} в компании ${company}.`;
+        console.log(message);
+        let message2 = 'Привет, меня зовут ' + name + '. Мне ' + age + ' лет. Я работаю на должности ' + position + ' в компании ' + company + '.';
+        console.log(message2);
     </script>
 </body>
 </html>
+
