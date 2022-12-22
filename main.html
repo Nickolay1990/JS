@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 4.1</title>
+    <title>Task4.2</title>
 </head>
-<body>    
+
+<body>
+    <pre>При выводе значений используйте форматированный вывод, например, "объем цилиндра с высотой X и радиусом Y = Z"
+    </pre>
     <script>
-        let name = "Иван";
-        let age = 25;
-        let company = "ITVDN";
-        let position = "Frontend Developer";
+        console.log("Вычисление объема цилиндра.");
+        let V;
+        const Pi = 3.1415926535;
+        let r = prompt('Enter radius', '0');
+        let h = prompt('Enter height', '0');
 
-        // инициализируйте переменную message
-        // значение должно быть создано с помощью шаблонной строки и с помощью конкатенации.
-        // строковое значение должно быть создано на основе значений переменных name, age, company, position
-        // Значение должно быть составлено по шаблону:
-        // Привет, меня зовут Иван. Мне 25 лет. Я работаю на должности Frontend Developer в компании ITVDN. 
-
-        let message = `Привет, меня зовут ${name}. Мне ${age} лет. Я работаю на должности ${position} в компании ${company}.`;
-        console.log(message);
-        let message2 = 'Привет, меня зовут ' + name + '. Мне ' + age + ' лет. Я работаю на должности ' + position + ' в компании ' + company + '.';
-        console.log(message2);
+        V = Pi * Number(r) * Number(r) * Number(h);
+        console.log(`Обьем цилиндра с высотой ${h} и радиусом ${r} равен ${V}.`);
     </script>
 </body>
-</html>
 
+</html>
