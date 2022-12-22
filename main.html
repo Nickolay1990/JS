@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 4.3</title>
+    <title>Task 4.4</title>
 </head>
+<body>
     <script>
-        let productPrice = 101.5;
-        let productQuantity = 50;
-        let quantity = prompt('Сколько единиц товара вы хотите?', '0');
-        let sum = productPrice * Number(quantity);
-        productQuantity -= quantity;
-        alert(`Вы должны внести ${sum} гривен.`);
-        alert(`На складе осталось ${productQuantity} единиц товара`);
+        let screenWidth = 1980;
+        let margins = 10;
+        let desieredBlockCount = 5;
+        let sumOfMargin = margins * (desieredBlockCount - 1);
+        let freeWidth = screenWidth - sumOfMargin;
+        let width = freeWidth / desieredBlockCount;
+        console.log(`ширина блока ${width} пикселей`)
     </script>
 </body>
-
 </html>
 
