@@ -4,22 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task4.2</title>
+    <title>Task 4.3</title>
 </head>
-
-<body>
-    <pre>При выводе значений используйте форматированный вывод, например, "объем цилиндра с высотой X и радиусом Y = Z"
-    </pre>
     <script>
-        console.log("Вычисление объема цилиндра.");
-        let V;
-        const Pi = 3.1415926535;
-        let r = prompt('Enter radius', '0');
-        let h = prompt('Enter height', '0');
-
-        V = Pi * Number(r) * Number(r) * Number(h);
-        console.log(`Обьем цилиндра с высотой ${h} и радиусом ${r} равен ${V}.`);
+        let productPrice = 101.5;
+        let productQuantity = 50;
+        let quantity = prompt('Сколько единиц товара вы хотите?', '0');
+        let sum = productPrice * Number(quantity);
+        productQuantity -= quantity;
+        alert(`Вы должны внести ${sum} гривен.`);
+        alert(`На складе осталось ${productQuantity} единиц товара`);
     </script>
 </body>
 
 </html>
+
