@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 5.2</title>
+    <title>Task 5.3</title>
 </head>
 <body>
     <script>
+        let ordersCount = 0;
         let product1 = "Бумага офисная А4, 80 г/м2, 500 л";
         let product2 = "Биндеры для бумаги 51 мм";
         let product3 = "Ручка шариковая синяя";
@@ -21,11 +22,12 @@
 
         let totalPrice = 0;
 
-        totalPrice += productPrice1 * productQuantity1;
-        totalPrice += productPrice2 * productQuantity2;
-        totalPrice += productPrice3 * productQuantity3;
+        totalPrice = totalPrice + productPrice1 * productQuantity1;
+        totalPrice = totalPrice + productPrice2 * productQuantity2;
+        totalPrice = totalPrice + productPrice3 * productQuantity3;
+        ordersCount ++;
 
-        alert(`Общая сумма ${totalPrice}`);
+        alert(`Общая сумма ${totalPrice}`); 
     </script>
 </body>
 </html>
