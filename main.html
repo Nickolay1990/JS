@@ -4,23 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 6.4</title>
+    <title>Task 6.5</title>
 </head>
 
 <body>
     <script>
-        let productPrice = 101.5;
-        let productQuantity = 50;
-        let count = prompt("Сколько единиц товара Вы хотите приобрести?", 0);
-        let totalSum = count * productPrice;
-        if (count > productQuantity) {
-            alert('Вы заказали больше товаров, чем есть в наличии');
-            alert("Количество товара останется на складе после покупки" + productQuantity);
+        let login = "admin";
+        let password = "12345";
+
+        let inputLogin = prompt("Введите логин");
+        let inputPassword = prompt("Введите пароль");
+
+        if (inputLogin == login && inputPassword == password) {
+            alert("Вы авторизованы!");
         }
         else {
-            productQuantity -= count;
-            alert("Общая стоимость " + totalSum);
-            alert("Количество товара останется на складе после покупки " + productQuantity);
+            alert("Логин или пароль введены неправильно");
         }
     </script>
 </body>
