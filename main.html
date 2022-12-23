@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 5.1</title>
+    <title>Task 5.2</title>
 </head>
 <body>
     <script>
@@ -21,9 +21,9 @@
 
         let totalPrice = 0;
 
-        totalPrice = totalPrice + productPrice1 * productQuantity1;
-        totalPrice = totalPrice + productPrice2 * productQuantity2;
-        totalPrice = totalPrice + productPrice3 * productQuantity3;
+        totalPrice += productPrice1 * productQuantity1;
+        totalPrice += productPrice2 * productQuantity2;
+        totalPrice += productPrice3 * productQuantity3;
 
         alert(`Общая сумма ${totalPrice}`);
     </script>
