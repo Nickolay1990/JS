@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 6.1</title>
+    <title>Task 6.2</title>
 </head>
 <body>
     <script>
-        x = prompt('enter a number');
-        if(x > 0){
-            alert(1);
+        alert("Вычисление объема цилиндра.");
+        let V;
+        const Pi = 3.1415926535; 
+        let r = +prompt("Введите радиус цилиндра");
+        let h = +prompt("Введите высоту цилиндра");
+        let bool = true;
+        if (isNaN(r) || r == 0){
+            alert('неверно указан радиус');
+            bool = false;
         }
-        else if (x < 0){
-            alert(-1);
+        if (isNaN(h) || h == 0){
+            alert('неверно указана высота');
+            bool = false
+        }
+        if (bool == false){
+            alert('неверно указаны данные')
         }
         else{
-            alert(0);
+        V = Pi * r * r * h;
+        alert(`Объем цилиндра с высотой ${h} и радиусом ${r} = ${V}`);
         }
     </script>
 </body>
 </html>
+
