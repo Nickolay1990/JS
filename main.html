@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 6.2</title>
+    <title>Task 6.3</title>
 </head>
 <body>
     <script>
-        alert("Вычисление объема цилиндра.");
-        let V;
-        const Pi = 3.1415926535; 
-        let r = +prompt("Введите радиус цилиндра");
-        let h = +prompt("Введите высоту цилиндра");
-        let bool = true;
-        if (isNaN(r) || r == 0){
-            alert('неверно указан радиус');
-            bool = false;
+        let product1 = "Бумага офисная А4, 80 г/м2, 500 л";
+        let product2 = "Биндеры для бумаги 51 мм";
+        let product3 = "Ручка шариковая синяя";
+
+        let productPrice1 = 280.25;
+        let productPrice2 = 56;
+        let productPrice3 = 12.50;
+
+        let productQuantity1 = prompt(`Укажите количество продуктов '${product1}', цена ${productPrice1}`, 0);
+        let productQuantity2 = prompt(`Укажите количество продуктов '${product2}', цена ${productPrice2}`, 0);
+        let productQuantity3 = prompt(`Укажите количество продуктов '${product3}', цена ${productPrice3}`, 0);
+
+        let totalPriceProduct1 = productPrice1 * productQuantity1;
+        let totalPriceProduct2 = productPrice2 * productQuantity2; 
+        let totalPriceProduct3 = productPrice3 * productQuantity3; 
+
+        let total = totalPriceProduct1 + totalPriceProduct2 + totalPriceProduct3;
+        console.log(`Общая сумма по продукту '${product1}' составляет ${totalPriceProduct1}`);
+        console.log(`Общая сумма по продукту '${product2}' составляет ${totalPriceProduct2}`);
+        console.log(`Общая сумма по продукту '${product3}' составляет ${totalPriceProduct3}`);
+        let delivery = confirm('Будете заказывать доставку?');
+        if (delivery){
+            total += 40;
         }
-        if (isNaN(h) || h == 0){
-            alert('неверно указана высота');
-            bool = false
-        }
-        if (bool == false){
-            alert('неверно указаны данные')
-        }
-        else{
-        V = Pi * r * r * h;
-        alert(`Объем цилиндра с высотой ${h} и радиусом ${r} = ${V}`);
-        }
+        console.log("Всего " + total);
     </script>
 </body>
 </html>
-
