@@ -1,31 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 7.2</title>
+    <title>Task 3</title>
 </head>
+
 <body>
     <script>
-        let season = +prompt('enter 1, 2, 3 or 4');
-        let result;
-        switch(season){
-            case 1:
-                result = 'winter';
-                break;
-            case 2:
-                result = 'spring';
-                break;
-            case 3:
-                result = 'summer';
-                break;
-            case 4:
-                result = 'autumn';
-                break;
-            default:
-                result = 'invalid data';
+        let country = prompt("введите название страны");
+        if(country == 'USA' || country == 'Great Britain'){
+            alert('English');
         }
-        alert(result);
+        else if(country == 'Germany'){
+            alert('German');
+        }
+        else if (country == 'France'){
+            alert('French');
+        }
+        else{
+            alert('invalid country');
+        }
     </script>
 </body>
+
 </html>
+
