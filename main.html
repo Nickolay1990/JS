@@ -4,26 +4,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 3</title>
+    <title>Task 7.4</title>
 </head>
 
 <body>
     <script>
-        let country = prompt("введите название страны");
-        if(country == 'USA' || country == 'Great Britain'){
-            alert('English');
+        let product1 = "Бумага офисная А4, 80 г/м2, 500 л";
+        let product2 = "Биндеры для бумаги 51 мм";
+        let product3 = "Ручка шариковая синяя";
+
+        let productPrice1 = 280.25;
+        let productPrice2 = 56;
+        let productPrice3 = 12.50;
+
+        let productQuantity1 = prompt(`Укажите количество продуктов '${product1}', цена ${productPrice1}`, 0);
+        let productQuantity2 = prompt(`Укажите количество продуктов '${product2}', цена ${productPrice2}`, 0);
+        let productQuantity3 = prompt(`Укажите количество продуктов '${product3}', цена ${productPrice3}`, 0);
+
+        let totalPriceProduct1 = productPrice1 * productQuantity1;
+        let totalPriceProduct2 = productPrice2 * productQuantity2;
+        let totalPriceProduct3 = productPrice3 * productQuantity3;
+
+        let total = totalPriceProduct1 + totalPriceProduct2 + totalPriceProduct3;
+        console.log(`Общая сумма по продукту '${product1}' составляет ${totalPriceProduct1}`);
+        console.log(`Общая сумма по продукту '${product2}' составляет ${totalPriceProduct2}`);
+        console.log(`Общая сумма по продукту '${product3}' составляет ${totalPriceProduct3}`);
+
+        let shipping = confirm("Заказываете доставку курьером?");
+        if (shipping)
+        {
+            total += 40;
+            console.log("Доставка 40");
         }
-        else if(country == 'Germany'){
-            alert('German');
+        console.log("Всего без скидки" + total);
+
+        let discont = 0;
+        let freeDelivery = false;
+        if (total > 500 && total < 1000){
+            discont = (total / 100) * 5;
         }
-        else if (country == 'France'){
-            alert('French');
+        else if (total > 1000 && total <1500){
+            discont = (total / 100) * 10;
         }
-        else{
-            alert('invalid country');
+        else if (total > 1500){
+            discont = (total / 100) * 15;
+            freeDelivery = true;
+            if (shipping){
+                discont += 40;
+            }
+        }
+        total -= discont;
+        alert(`order - ${total}, your discont - ${discont}`)
+        if (shipping && freeDelivery == false){
+            alert('delivery 40')
         }
     </script>
 </body>
 
 </html>
-
