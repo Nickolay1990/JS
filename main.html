@@ -4,60 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 7.4</title>
+    <title>Task 7.5</title>
 </head>
 
 <body>
     <script>
-        let product1 = "Бумага офисная А4, 80 г/м2, 500 л";
-        let product2 = "Биндеры для бумаги 51 мм";
-        let product3 = "Ручка шариковая синяя";
+        let age = +prompt("Введите ваш возраст");
+        let technology = prompt("Ведите 1 или 2. 1 - JavaScript. 2 - C#");
+        let expirience = prompt("Введите опыт работы в годах.");
 
-        let productPrice1 = 280.25;
-        let productPrice2 = 56;
-        let productPrice3 = 12.50;
+        let adult, specialization, position;
 
-        let productQuantity1 = prompt(`Укажите количество продуктов '${product1}', цена ${productPrice1}`, 0);
-        let productQuantity2 = prompt(`Укажите количество продуктов '${product2}', цена ${productPrice2}`, 0);
-        let productQuantity3 = prompt(`Укажите количество продуктов '${product3}', цена ${productPrice3}`, 0);
-
-        let totalPriceProduct1 = productPrice1 * productQuantity1;
-        let totalPriceProduct2 = productPrice2 * productQuantity2;
-        let totalPriceProduct3 = productPrice3 * productQuantity3;
-
-        let total = totalPriceProduct1 + totalPriceProduct2 + totalPriceProduct3;
-        console.log(`Общая сумма по продукту '${product1}' составляет ${totalPriceProduct1}`);
-        console.log(`Общая сумма по продукту '${product2}' составляет ${totalPriceProduct2}`);
-        console.log(`Общая сумма по продукту '${product3}' составляет ${totalPriceProduct3}`);
-
-        let shipping = confirm("Заказываете доставку курьером?");
-        if (shipping)
-        {
-            total += 40;
-            console.log("Доставка 40");
+        adult = age > 18 ? "совершеннолетний" : "несовершеннолетний";
+        specialization = technology == 1 ? "Frontend" : "Backend";
+        if (expirience == 0) {
+            position = "Без опыта работы";
         }
-        console.log("Всего без скидки" + total);
+        else if (expirience > 0 && expirience < 1.5) {
+            position = "Junior";
+        }
+        else if (expirience > 1.5 && expirience < 3) {
+            position = "Middle";
+        }
+        else if (expirience > 3) {
+            position = "Senior";
+        }
+        else {
+            position = "error";
+        }
 
-        let discont = 0;
-        let freeDelivery = false;
-        if (total > 500 && total < 1000){
-            discont = (total / 100) * 5;
-        }
-        else if (total > 1000 && total <1500){
-            discont = (total / 100) * 10;
-        }
-        else if (total > 1500){
-            discont = (total / 100) * 15;
-            freeDelivery = true;
-            if (shipping){
-                discont += 40;
-            }
-        }
-        total -= discont;
-        alert(`order - ${total}, your discont - ${discont}`)
-        if (shipping && freeDelivery == false){
-            alert('delivery 40')
-        }
+        let result = `Возраст: ${adult}\r\nСпециализация: ${specialization}\r\nПозиция: ${position}`;
+        alert(result);
     </script>
 </body>
 
