@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 7.1</title>
+    <title>Task 7.2</title>
 </head>
 <body>
     <script>
-        let value = prompt("Введите число 1 или 2");
-        switch(value){
-            case '1':
-                alert('you entered 1');
+        let season = +prompt('enter 1, 2, 3 or 4');
+        let result;
+        switch(season){
+            case 1:
+                result = 'winter';
                 break;
-            case '2':
-                alert('you entered 2');
+            case 2:
+                result = 'spring';
+                break;
+            case 3:
+                result = 'summer';
+                break;
+            case 4:
+                result = 'autumn';
                 break;
             default:
-                alert('invalid data');
+                result = 'invalid data';
         }
+        alert(result);
     </script>
 </body>
 </html>
