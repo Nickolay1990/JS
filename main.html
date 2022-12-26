@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 8.4</title>
+    <title>Task 8.5</title>
 </head>
+
 <body>
     <script>
+        let secretNumber = Math.floor(Math.random() * 101);
         let userNumber;
-        while (true){
-            userNumber = +prompt('enter number');
-            if(isNaN(userNumber)){
-                continue;
+        let userTry = 0;
+
+        while (userNumber != secretNumber) {
+            userTry ++;
+            while (true) {
+                userNumber = +prompt('enter number');
+                if (isNaN(userNumber)) {
+                    continue;
+                }
+                else {
+                    break;
+                }
             }
-            else{
-                break;
+            if (secretNumber < userNumber) {
+                alert('secret number less then ' + userNumber + '\r\n you used ' + userTry + ' attemps.');
+            }
+            else if (secretNumber > userNumber) {
+                alert('secret number more then ' + userNumber + '\r\n you used ' + userTry + ' attemps.');
             }
         }
-        let sum = 0;
-        for(start = 0; start <= userNumber; start++){
-            sum += start;
-        }
-        alert('sum is ' + sum);
+        alert('Congratulations!!! ' + userTry + ' attemps.')
+
     </script>
 </body>
+
 </html>
