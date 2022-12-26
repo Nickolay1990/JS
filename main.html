@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 8.1</title>
+    <title>Task 8.2</title>
 </head>
 <body>
     <script>
-        for( let start = 0; start <= 100; start++){
-            if(start % 2 == 0){
-                console.log(start);
+        let userNumber = 0;
+        while(userNumber < 10){
+            userNumber = +prompt('enter number more then 10');
+            if(isNaN(userNumber)){
+                userNumber = 0;
             }
         }
     </script>
