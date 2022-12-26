@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 8.3</title>
+    <title>Task 8.4</title>
 </head>
-
 <body>
     <script>
-        let i = 0;
-        while(i < 5){
-            console.log(`value ${i}`);
-            i++;
+        let userNumber;
+        while (true){
+            userNumber = +prompt('enter number');
+            if(isNaN(userNumber)){
+                continue;
+            }
+            else{
+                break;
+            }
         }
+        let sum = 0;
+        for(start = 0; start <= userNumber; start++){
+            sum += start;
+        }
+        alert('sum is ' + sum);
     </script>
 </body>
-
 </html>
