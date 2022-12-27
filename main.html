@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 9.4</title>
+    <title>Task 9.5</title>
 </head>
 <body>
     <script>
-        let evenNumbers = [];
-        let oddNumbers = [];
-        let values = [10, 20, 5, 7, 11, 8, 125, 4, 8, 3, 23];
-        for (let i of values){
-            if(i % 2 == 0){
-                evenNumbers.push(i);
-            }
-            else{
-                oddNumbers.push(i);
+        let values = [-1, -5, -6, -3, -10, -5, -3, 4, -1, -8, 1, -10, 3];
+        for(let i of values){
+            if(i > 0){
+                alert('Number is ' + i);
+                alert('His index is ' + values.indexOf(i))
+                break;
             }
         }
-        console.log('Even numbers ' + evenNumbers);
-        console.log('Odd numbers ' + oddNumbers);
     </script>
 </body>
 </html>
