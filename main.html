@@ -3,28 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 9.6</title>
+    <title>Task 9.7</title>
 </head>
 <body>
     <script>
-        let minValue = Number.MAX_VALUE;
-        let maxValue = Number.MIN_VALUE;
-        let indexMinValue;
-        let indexMaxValue;
-        let values = [10, 20, 300, 4, 6, 11, 9, 125, 1, 8, -1, 0, 3];
-        for(let i of values){
-            if(i > maxValue){
-                maxValue = i;
-                indexMaxValue = values.indexOf(i);
-            }
-            if(i < minValue){
-                minValue = i;
-                indexMinValue = values.indexOf(i);
+        let values = [10, 20, 48, 6, 11, 9, 125, 1, 8, 0, 3, 255, 77, 11, 170, 4, 28 ];
+        let sum = 0;
+        let average;
+        for (let i of values){
+            sum += i
+        }
+        average = sum / values.length;
+        for (let i of values){
+            if (i > average){
+                console.log(i);
             }
         }
-        values[indexMaxValue] = minValue;
-        values[indexMinValue] = maxValue;
-        console.log(values);
     </script>
 </body>
 </html>
