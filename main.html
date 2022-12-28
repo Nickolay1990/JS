@@ -3,27 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 9.8</title>
+    <title>Task 10.1</title>
 </head>
 <body>
     <script>
-        let values = [10, 20, 4, 6, 11, 9, 125, 10, 8, 0, 3, 5, 89, 12, 46, 77, 3];
-        let count;
-        let repeatValues = []
-        for(let i of values){
-            count = 0;
-            for (let k of values){
-                if (i == k){
-                    count ++;
-                }
-            }
-            if(count > 1){
-                repeatValues.push(i);
-            }
+        let cities = ["London", "Paris", "Berlin", "Rome", "Budapest", "Lisbon", "Madrid", "Amsterdam"];
+        console.log(cities);
+        userCity = prompt('Enter a city');
+        cityIndex = cities.indexOf(userCity);
+        if(cityIndex == -1){
+            alert('Your city not defined');
         }
-        for ( let i = 0; i < repeatValues.length; i += 2){
-            console.log(repeatValues[i])
+        else{
+        cities.splice(cityIndex, 1);
         }
+        console.log(cities);
     </script>
 </body>
 </html>
