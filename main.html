@@ -3,31 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 10.2</title>
+    <title>Task 10.3</title>
 </head>
 <body>
     <script>
-        let value;
-        let values = [];
-        let sum = 0;
-        while(true){
-            value = prompt('Enter value or "stop" for finish');
-            if(value == 'stop'){
-                break;
+        let values = [10, 20, 5, 7, 11, 8, 125, 4, 8, 3, 23];
+        let oddValues = [];
+        let evenValues = [];
+        let oddValuesPosition = 0;
+        let evenValuesPosition = 0;
+
+        for (let value of values)
+        {
+            if (value % 2 == 0)
+            {
+                evenValues.push(value);
+                evenValuesPosition++;
             }
-            let numberValue = Number(value);
-            if(isNaN(numberValue)){
-                continue;
-            }
-            else{
-                values.push(numberValue);
+            else
+            {
+                oddValues.push(value);
+                oddValuesPosition++;
             }
         }
-        for(i of values){
-            sum += i;
+
+        console.log("Нечетные значения");
+        for (let oddVal of oddValues)
+        {
+            console.log(oddVal);
         }
-        console.log(values);
-        console.log(sum);
+
+        console.log("Четные значения");
+        for (let evenVal of evenValues)
+        {
+            console.log(evenVal);
+        }
     </script>
 </body>
 </html>
