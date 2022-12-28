@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 10.4</title>
+    <title>Task 10.5</title>
 </head>
+
 <body>
     <script>
-        let values = [10, 20, -2, 6, 11, -10, 125, -3, 8, 0, 3];
-        for(let value of values){
-            if(value < 0){
-                let index = values.indexOf(value);
-                values.splice(index, 1);
-            }
+        let names = [];
+        names[0] = "Бумага офисная А4, 80 г/м2, 500 л";
+        names[1] = "Биндеры для бумаги 51 мм";
+        names[2] = "Ручка шариковая синяя";
+
+        let prices = [];
+        prices[0] = 280.25;
+        prices[1] = 56;
+        prices[2] = 12.50;
+
+        let count = [];
+        count[0] = +prompt(`Сколько ${names[0]} вы хотите купить?`);
+        count[1] = +prompt(`Сколько ${names[1]} вы хотите купить?`);
+        count[2] = +prompt(`Сколько ${names[2]} вы хотите купить?`);
+
+        let sum = 0;
+        for(let index = 0; index < names.length; index++){
+            let price = prices[index] * count[index];
+            console.log(`За ${names[index]} вы должны заплатить - ${price}`);
+            sum += price;
         }
-        console.log(values);
+        console.log(`Всего:  ${sum}`);
+
     </script>
 </body>
+
 </html>
