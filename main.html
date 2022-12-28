@@ -3,21 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 10.1</title>
+    <title>Task 10.2</title>
 </head>
 <body>
     <script>
-        let cities = ["London", "Paris", "Berlin", "Rome", "Budapest", "Lisbon", "Madrid", "Amsterdam"];
-        console.log(cities);
-        userCity = prompt('Enter a city');
-        cityIndex = cities.indexOf(userCity);
-        if(cityIndex == -1){
-            alert('Your city not defined');
+        let value;
+        let values = [];
+        let sum = 0;
+        while(true){
+            value = prompt('Enter value or "stop" for finish');
+            if(value == 'stop'){
+                break;
+            }
+            let numberValue = Number(value);
+            if(isNaN(numberValue)){
+                continue;
+            }
+            else{
+                values.push(numberValue);
+            }
         }
-        else{
-        cities.splice(cityIndex, 1);
+        for(i of values){
+            sum += i;
         }
-        console.log(cities);
+        console.log(values);
+        console.log(sum);
     </script>
 </body>
 </html>
