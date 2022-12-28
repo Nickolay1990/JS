@@ -3,41 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 10.3</title>
+    <title>Task 10.4</title>
 </head>
 <body>
     <script>
-        let values = [10, 20, 5, 7, 11, 8, 125, 4, 8, 3, 23];
-        let oddValues = [];
-        let evenValues = [];
-        let oddValuesPosition = 0;
-        let evenValuesPosition = 0;
-
-        for (let value of values)
-        {
-            if (value % 2 == 0)
-            {
-                evenValues.push(value);
-                evenValuesPosition++;
-            }
-            else
-            {
-                oddValues.push(value);
-                oddValuesPosition++;
+        let values = [10, 20, -2, 6, 11, -10, 125, -3, 8, 0, 3];
+        for(let value of values){
+            if(value < 0){
+                let index = values.indexOf(value);
+                values.splice(index, 1);
             }
         }
-
-        console.log("Нечетные значения");
-        for (let oddVal of oddValues)
-        {
-            console.log(oddVal);
-        }
-
-        console.log("Четные значения");
-        for (let evenVal of evenValues)
-        {
-            console.log(evenVal);
-        }
+        console.log(values);
     </script>
 </body>
 </html>
