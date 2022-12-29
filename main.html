@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 11.2</title>
+    <title>Task 11.3</title>
 </head>
+
 <body>
     <script>
-        function avg(a, b, c){
-            if(a === undefined){
-                return (b + c) / 2;
-            }
-            else if (b === undefined){
-                return (a + c) / 2;
-            }
-            else if (c === undefined){
-                return(a + b) / 2;
-            }
-            else{
-                return(a + b + c) / 3;
+        let names = [];
+        names[0] = "Бумага офисная А4, 80 г/м2, 500 л";
+        names[1] = "Биндеры для бумаги 51 мм";
+        names[2] = "Ручка шариковая синяя";
+
+        let prices = [];
+        prices[0] = 280.25;
+        prices[1] = 56;
+        prices[2] = 12.50;
+
+        let countProducts = [];
+
+        function countToBuy() {    
+            for (let index = 0; index < names.length; index++) {
+                let productCount = +prompt("Укажите количество для " + names[index]);
+                if (isNaN(productCount)) {
+                    productCount = 0;
+                }
+                countProducts.push(productCount);
             }
         }
-        let result = avg(2, 3, 4);
-        console.log(result);
+
+        function calculateAndShowTotalPrice() {
+            let totalSum = 0;
+            for (let index = 0; index < countProducts.length; index++) {
+                totalSum += countProducts[index] * prices[index];
+                console.log(`Куплено ${names.index} на сумму ${countProducts[index] * prices[index]}`)
+            }
+            console.log("Всего продуктов куплено на " + totalSum);
+        }
+        
+        countToBuy();
+        calculateAndShowTotalPrice();
     </script>
 </body>
+
 </html>
