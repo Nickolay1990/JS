@@ -1,38 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 10.5</title>
+    <title>Task 11.1</title>
 </head>
-
 <body>
     <script>
-        let names = [];
-        names[0] = "Бумага офисная А4, 80 г/м2, 500 л";
-        names[1] = "Биндеры для бумаги 51 мм";
-        names[2] = "Ручка шариковая синяя";
-
-        let prices = [];
-        prices[0] = 280.25;
-        prices[1] = 56;
-        prices[2] = 12.50;
-
-        let count = [];
-        count[0] = +prompt(`Сколько ${names[0]} вы хотите купить?`);
-        count[1] = +prompt(`Сколько ${names[1]} вы хотите купить?`);
-        count[2] = +prompt(`Сколько ${names[2]} вы хотите купить?`);
-
-        let sum = 0;
-        for(let index = 0; index < names.length; index++){
-            let price = prices[index] * count[index];
-            console.log(`За ${names[index]} вы должны заплатить - ${price}`);
-            sum += price;
+        function minNumber(a, b){
+            if(a < b){
+                return a;
+            }
+            else{
+                return b;
+            }
         }
-        console.log(`Всего:  ${sum}`);
-
+        let result = minNumber(43, 32);
+        console.log(result);
     </script>
 </body>
-
 </html>
