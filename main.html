@@ -4,27 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 11.4</title>
+    <title>Task 11.5</title>
 </head>
 
 <body>
-    <pre>
-        Задание:
-        Создайте функцию random(min, max), которая возвращает случайное значение в диапазоне от min до max.
-        Сделайте, чтобы сценарий заработал. Код генерации случайного значения найдите с помощью поисковой системы или в заданиях из прошлых уроков.
-    </pre>
     <script>
-        function random(min, max){
-            return min + Math.floor((max - min + 1) * Math.random());
+        let someMassive = [1, 2, 54, 23, 1, 2, 547, 54];
+        function someFunction(massive) {
+            let dubleMassive = [];
+            for (let indexUpper = 0; indexUpper < massive.length - 1; indexUpper++) {
+                for (let indexLower = indexUpper + 1; indexLower < massive.length; indexLower++) {
+                    if (massive[indexUpper] == massive[indexLower]) {
+                        dubleMassive.push(massive[indexLower]);
+                    }
+                }
+            }
+            if(dubleMassive.length > 0){
+                return dubleMassive;
+            }
+            else{
+                return null;
+            }
         }
-        let throwCount = +prompt("Сколько раз вы хотите бросить шестигранный кубик");
-
-        for (let i = 0; i < throwCount; i++) {
-            const result = random(1, 6);
-            console.log(result);
-        }
-
+        let result = someFunction(someMassive);
+        console.log(result);
     </script>
 </body>
-Сам не решил это!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 </html>
