@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 11.1</title>
+    <title>Task 11.2</title>
 </head>
 <body>
     <script>
-        function minNumber(a, b){
-            if(a < b){
-                return a;
+        function avg(a, b, c){
+            if(a === undefined){
+                return (b + c) / 2;
+            }
+            else if (b === undefined){
+                return (a + c) / 2;
+            }
+            else if (c === undefined){
+                return(a + b) / 2;
             }
             else{
-                return b;
+                return(a + b + c) / 3;
             }
         }
-        let result = minNumber(43, 32);
+        let result = avg(2, 3, 4);
         console.log(result);
     </script>
 </body>
