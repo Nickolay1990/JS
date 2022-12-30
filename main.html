@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 12.4</title>
+    <title>Task 12.5</title>
 </head>
-
 <body>
-    <pre>
     <script>
-        let values = [10, 20, 5, 7, 11, 8, 125, 4, 8, 3, 23];
-        let oddValues = values.filter(value => value % 2 != 0);
-        let evenValues = values.filter(value => value % 2 == 0);
-        let oddValuesPosition = 0;
-        let evenValuesPosition = 0;
-
-        oddValues.forEach(value => console.log(value));
-        console.log('-------------------------')
-        evenValues.forEach(value => console.log(value))
+        let input = +prompt('Enter number')
+        if(isNaN(input)){
+            alert('it is not number!')
+            input = 0;
+        }
+        function rec(n){
+            if(n == 0){
+                return 1;
+            }
+            console.log(n);
+            return rec(n - 1);
+        }
+        rec(input);
     </script>
 </body>
-
 </html>
