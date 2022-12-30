@@ -4,14 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 12.1</title>
+    <title>Task 12.2</title>
 </head>
 
 <body>
-    <pre>
-        Задание:
-        Исправьте ошибку в коде, связанную с областями видимостей.
-    </pre>
     <script>
         let names = [];
         names[0] = "Бумага офисная А4, 80 г/м2, 500 л";
@@ -22,24 +18,24 @@
         prices[0] = 280.25;
         prices[1] = 56;
         prices[2] = 12.50;
+
         let count = [];
 
-        initCountArray();
-        calculateSum();
 
-        
 
-        function initCountArray() {
+        let initCountArray = function() {
             for (let i = 0; i < names.length; i++) {
                 const productName = names[i];
                 let counttoBuy = +prompt("Укажите количество для " + productName);
+
                 if (isNaN(counttoBuy))
                     counttoBuy = 0;
+
                 count.push(counttoBuy);
             }
         }
 
-        function calculateSum() {
+        let calculateSum = function() {
             let totalSum = 0;
             for (let i = 0; i < names.length; i++) {
                 const productName = names[i];
@@ -52,6 +48,8 @@
             }
             console.log("Всего продуктов куплено на " + totalSum);
         }
+        initCountArray();
+        calculateSum();
     </script>
 
 </body>
