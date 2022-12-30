@@ -4,54 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 12.2</title>
+    <title>Task 12.3</title>
 </head>
 
 <body>
     <script>
-        let names = [];
-        names[0] = "Бумага офисная А4, 80 г/м2, 500 л";
-        names[1] = "Биндеры для бумаги 51 мм";
-        names[2] = "Ручка шариковая синяя";
+        var data = [1, 2, 3, 4, 5];
 
-        let prices = [];
-        prices[0] = 280.25;
-        prices[1] = 56;
-        prices[2] = 12.50;
+        var result = data.map(value => value * value)
 
-        let count = [];
-
-
-
-        let initCountArray = function() {
-            for (let i = 0; i < names.length; i++) {
-                const productName = names[i];
-                let counttoBuy = +prompt("Укажите количество для " + productName);
-
-                if (isNaN(counttoBuy))
-                    counttoBuy = 0;
-
-                count.push(counttoBuy);
-            }
-        }
-
-        let calculateSum = function() {
-            let totalSum = 0;
-            for (let i = 0; i < names.length; i++) {
-                const productName = names[i];
-                const productPrice = prices[i];
-                const boughtCount = count[i];
-
-                let price = productPrice * boughtCount;
-                totalSum += price;
-                console.log(`Куплено ${productName} на сумму ${price}`);
-            }
-            console.log("Всего продуктов куплено на " + totalSum);
-        }
-        initCountArray();
-        calculateSum();
+        result.forEach(value => console.log(value));
     </script>
-
 </body>
 
 </html>
