@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 13.1</title>
+    <title>Task 13.2</title>
 </head>
-
 <body>
     <script>
-        let user = {
-            name: "admin",
-            email: "admin@example.com"
+        let user1 = {
+            firstName: 'Kolia',
+            lastName: 'Bogdanovich'
         };
-
-        console.log(user.name);
-        console.log(user.email);
-
-        user.email = "admin@itvdn.com";
-
-        console.log(user.email);
+        let user2 = new Object();
+        user2.firstName = 'Lerka';
+        user2.lastName = 'Yakshina';
+        function print(obj){
+            alert(obj.firstName);
+            alert(obj.lastName);
+        }
+        print(user1);
+        print(user2);
     </script>
 </body>
-
 </html>
