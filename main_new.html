@@ -4,16 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 2.1</title>
+    <title>Task 2.2</title>
+
+    <style>
+        #color-sample {
+            width: 250px;
+            height: 70px;
+            margin: 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <div>Вы ввели: <span></span></div>
+    <div id="color-sample"></div>
+    <p>Цвет: </p>
 
     <script>
-        let input = prompt("Введите сообщение");
-        let span = document.querySelector('span');
-        span.textContent = input;
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+        lettersOfColor = getRandomColor();
+        let colorSampleDiv = document.querySelector("#color-sample");
+        colorSampleDiv.style.backgroundColor = lettersOfColor;
+
+        let para = document.querySelector('p');
+        para.append(lettersOfColor);
+
+
     </script>
 </body>
 
