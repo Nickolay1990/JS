@@ -4,46 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 1.4</title>
+    <title>Task 1.5</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
 </head>
 
 <body>
-    <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quam est debitis. Architecto quas asperiores
-        blanditiis a fugiat impedit eum dolorem cum rerum dolorum iste amet, ratione assumenda expedita maiores?
-    </p>
-    <p class="border">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore eligendi nemo est? Unde, doloribus, magnam
-        necessitatibus eos quia aliquam eaque quis aspernatur placeat sequi autem officiis, modi a exercitationem totam.
-    </p>
-    <p class="border">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi doloremque magni ut corporis, perspiciatis
-        tempore in, accusantium suscipit nemo quod saepe. Autem laudantium adipisci nemo magni repudiandae repellat
-        error. Dolore?
-    </p>
-    <ul>
-        <li>Item 01</li>
-        <li>Item 02</li>
-        <li>Item 03</li>
-        <li>Item 04</li>
-        <li>Item 05</li>
-    </ul>
-    <ul class="border">
-        <li>Item 01</li>
-        <li>Item 02</li>
-        <li>Item 03</li>
-        <li>Item 04</li>
-        <li>Item 05</li>
-    </ul>
-</body>
+    <div>
+        <p id="first">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, numquam unde. Aut dolorum in, quia
+            numquam
+            error recusandae est odio nesciunt ut illum blanditiis illo minima, officiis mollitia eaque fugit.</p>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum corrupti sapiente, qui eius fuga nisi. Sequi
+            quibusdam sapiente deserunt fuga dolorem commodi perspiciatis, cum soluta possimus quaerat. Labore, eveniet
+            iusto.</p>
+        <a href="https://itvdn.com">ITVDN</a> |
+        <a href="https://itvdn.com/ru/live-online">Live Online</a>
+    </div>
 
-<script>
-    let listUl = document.querySelectorAll('ul');
-    for (ul of listUl) {
-        let listLi = ul.querySelectorAll('li');
-        listLi[0].style.border = '1px solid red';
-        listLi[listLi.length - 1].style.border = '1px solid red';
-    }
-</script>
+    <input type="radio" name="answer" checked /> Yes
+    <input type="radio" name="answer" /> No
+
+    <ul class="my-list">
+        <li>List Item 1-1</li>
+        <li>List Item 2-1</li>
+        <li>List Item 3-1</li>
+        <li>List Item 4-1</li>
+        <li>List Item 5-1</li>
+    </ul>
+
+    <article>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Est fugit natus sapiente laborum esse. Aperiam eum
+        illum fuga laborum alias consectetur, quibusdam nisi quidem aliquam nulla, quae vero expedita fugiat.
+    </article>
+
+    <ul class="my-list">
+        <li>List Item 1-2</li>
+        <li>List Item 2-2</li>
+        <li>List Item 3-2</li>
+        <li>List Item 4-2</li>
+        <li>List Item 5-2</li>
+    </ul>
+
+    <script>
+        /* 
+        Задание:
+        Поменяйте вызовы методов  getElementsByName,
+        на вызовы методов querySelector или querySelectorAll так, чтобы поведение сценария не изменилось.
+        */
+
+        let paragraph = document.querySelector("#first");
+        paragraph.style.border = "2px solid red";
+
+        let radioButtons = document.querySelectorAll("[name=answer]");
+        for (const button of radioButtons) {
+            button.checked = !button.checked;
+        }
+
+        let listItems = document.querySelectorAll("li");
+        for (const item of listItems) {
+            item.style.margin = "2px";
+            item.style.border = "2px solid green";
+        }
+
+        let lists = document.querySelectorAll(".my-list");
+        for (const list of lists) {
+            list.style.border = "2px solid blue";
+        }
+    </script>
+</body>
 
 </html>
