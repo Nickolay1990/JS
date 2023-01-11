@@ -1,42 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 2.2</title>
+    <title>Task 2.3</title>
 
     <style>
-        #color-sample {
-            width: 250px;
-            height: 70px;
-            margin: 10px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        td, th {
+            padding: 8px;
         }
     </style>
 </head>
-
 <body>
-    <div id="color-sample"></div>
-    <p>Цвет: </p>
+    <table id="statsTable">
+        <tr id="continue">
+            <th>Месяц</th>
+            <th>Отдел 1</th>
+            <th>Отдел 2</th>
+        </tr>
+        <tr>
+            <td>Январь</td>
+            <td>50</td>
+            <td>120</td>
+        </tr>
+        <tr>
+            <td>Февраль</td>
+            <td>60</td>
+            <td>140</td>
+        </tr>
+        <tr>
+            <td>Март</td>
+            <td>125</td>
+            <td>115</td>
+        </tr>
+        <tr>
+            <td>Апрель</td>
+            <td>87</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>Март</td>
+            <td>95</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td>Июнь</td>
+            <td>115</td>
+            <td>90</td>
+        </tr>
+        <tr>
+            <td>Июль</td>
+            <td>125</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td>Итого</td>
+            <td id="output1"></td>
+            <td id="output2"></td>
+        </tr>
+    </table>
+
+    <div id="result"></div>
 
     <script>
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
+        let sum1 = 0;
+        let sum2 = 0;
+        let first = document.querySelector('#output1');
+        let second = document.querySelector('#output2');
+        messageDiv = document.querySelector('#result');
+
+        for(const row of document.querySelector('#statsTable').rows){
+            if(row.rowIndex == 0){
+                continue;
             }
-            return color;
+            sum1 += Number(row.cells[1].textContent);
+            sum2 += Number(row.cells[2].textContent);
         }
-        lettersOfColor = getRandomColor();
-        let colorSampleDiv = document.querySelector("#color-sample");
-        colorSampleDiv.style.backgroundColor = lettersOfColor;
+        first.textContent = sum1;
+        second.textContent = sum2;
+        message1 = "Отдел 1 сделал больше продаж";
+        message2 = "Отдел 2 сделал больше продаж";
+        if(sum1 > sum2){
+            messageDiv.textContent = message1;
+        }
+        else{
+            messageDiv.textContent = message2;
+        }
 
-        let para = document.querySelector('p');
-        para.append(lettersOfColor);
-
-
+        //Сам не решил!
     </script>
 </body>
-
 </html>
