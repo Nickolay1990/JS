@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 3.3</title>
-
+    <title>Task 3.4</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,44 +23,59 @@
 </head>
 
 <body>
-    <table id="statsTable">
-        <tr>
-            <td>Январь</td>
-            <td>20</td>
-        </tr>
-        <tr>
-            <td>Февраль</td>
-            <td>140</td>
-        </tr>
-        <tr>
-            <td>Март</td>
-            <td>115</td>
-        </tr>
-        <tr>
-            <td>Апрель</td>
-            <td>100</td>
-        </tr>
-        <tr>
-            <td>Март</td>
-            <td>80</td>
-        </tr>
-        <tr>
-            <td>Июнь</td>
-            <td>90</td>
-        </tr>
-        <tr>
-            <td>Июль</td>
-            <td>100</td>
-        </tr>
-    </table>
-
     <script>
-        let listOfTd = document.querySelectorAll('#statsTable td:nth-child(2)');
-        for(const i of listOfTd){
-            if(i.textContent < 100){
-                i.parentElement.remove();
+        let source = [
+            {
+                month: "Январь",
+                amount: 20
+            },
+            {
+                month: "Февраль",
+                amount: 140
+            },
+            {
+                month: "Март",
+                amount: 115
+            },
+            {
+                month: "Апрель",
+                amount: 100
+            },
+            {
+                month: "Март",
+                amount: 80
+            },
+            {
+                month: "Июнь",
+                amount: 90
+            },
+            {
+                month: "Июль",
+                amount: 100
             }
+        ];
+
+        let table = document.createElement('table');
+        document.body.append(table);
+
+        function createTable(first, second){
+            let tr = document.createElement('tr');
+            table.append(tr);
+            let td1 = document.createElement('td');
+            let td2 = document.createElement('td');
+            td1.textContent = first;
+            td2.textContent = second;
+            tr.append(td1);
+            tr.append(td2);
+            console.log(table);
         }
+        
+
+        source.forEach(i => {
+            createTable(i.month, i.amount);
+        })
+        
+
     </script>
 </body>
 
