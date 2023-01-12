@@ -4,26 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 3.1</title>
+    <title>Task 3.2</title>
+
+    <style>
+        div {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-    <div id="output">
+    Рабочие дни
+    <div id="work"></div>
 
-    </div>
+    Выходные дни
+    <div id="weekend"></div>
 
     <script>
-        /*
-        Задание:
-        Создайте параграфы под каждый элемент массива days, значения элементов массива должны быть добавлены как текст в параграфе.
-        Разместите все созданные параграфы в div с id output
-        */
-        let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        let div = document.querySelector('#output');
-        for(i of days){
-            let par = document.createElement('p');
-            par.textContent = i;
-            div.append(par);
+        let days = [{ name: "Sunday", isWorkDay: false },
+        { name: "Monday", isWorkDay: true },
+        { name: "Tuesday", isWorkDay: true },
+        { name: "Wednesday", isWorkDay: true },
+        { name: "Thursday", isWorkDay: true },
+        { name: "Friday", isWorkDay: true },
+        { name: "Saturday", isWorkDay: false }];
+        let work = document.querySelector('#work');
+        let weekend = document.querySelector('#weekend');
+
+        for (const i of days) {
+            let p = document.createElement('p');
+            p.textContent = i.name;
+            if (i.isWorkDay == false) {
+                weekend.append(p);
+            }
+            else{
+                work.append(p);
+            }
         }
     </script>
 </body>
