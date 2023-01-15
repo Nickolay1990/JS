@@ -5,34 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 4.4</title>
+    <title>Task 5.5</title>
 </head>
 
 <body>
-    <div class="task" data-status="completed">
-        Купить молоко
-    </div>
-
-    <div class="task" data-status="expired">
-        Выгулять собаку
-    </div>
-
-    <div class="task">
-        Выучить JavaScript
-    </div>
-
-    <div class="task">
-        Спасти мир
-    </div>
+    <div data-bind="firstName"></div>
+    <div data-bind="lastName"></div>
+    <div data-bind="age"></div>
 
     <script>
-        let borders = document.querySelectorAll('[data-status]');
-        for(const i of borders){
-            if(i.dataset.status == 'completed'){
-                i.style.border = '1px solid green';
-            }
-            else{
-                i.style.border = '1px solid red';
+        let user = {
+            firstName: "Jhon",
+            lastName: "Doe",
+            age: "25",
+        }
+
+
+        let divs = document.querySelectorAll('[data-bind]');
+        for(const div of divs){
+            let value = div.dataset.bind;
+            if(value in user){
+                div.textContent = user[value];
             }
         }
     </script>
