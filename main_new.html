@@ -5,90 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 6.3</title>
-
-    <style>
-        .error {
-            color: red;
-            display:none;
-        }
-    </style>
+    <title>Task 6.4</title>
 </head>
 
 <body>
-    Операнд 1: <input id="input1" type="text"> <br />
-    <span id="input1Error" class="error">Введите значение</span> <br />
-    
-    Операнд 2: <input id="input2" type="text"> <br />
-    <span id="input2Error" class="error">Введите значение</span> <br />
-
-    <button id="add-btn">+</button>
-    <button id="rem-btn">-</button>
-    <button id="mul-btn">*</button>
-    <button id="div-btn">/</button>
-    <button id="reset-btn">reset</button>
+    <ul id="list">
+        <li>Яблого</li>
+        <li>Груша</li>
+        <li>Апельсин</li>
+        <li>Мандарин</li>
+        <li>Ананас</li>
+        <li>Слива</li>
+    </ul>
+    <button id="sortBtn">Sotr!</button>
 
     <script>
-        let input1 = document.querySelector("#input1");
-        let input2 = document.querySelector("#input2");
-        let span1 = document.querySelector('#input1Error');
-        let span2 = document.querySelector('#input2Error');
+        let list = document.querySelector("#list");
+        let items = document.querySelectorAll("li");
+        let itemsArray = Array.from(items);
+        let btn = document.querySelector('#sortBtn');
 
-        let addBtn = document.querySelector("#add-btn");
-        let remBtn = document.querySelector("#rem-btn");
-        let mulBtn = document.querySelector("#mul-btn");
-        let divBtn = document.querySelector("#div-btn");
-        let resBtn = document.querySelector('#reset-btn');
+        btn.addEventListener('click', startSort);
 
-        resBtn.addEventListener('click', reset);
+        function startSort() {
+            itemsArray.sort(function (a, b) {
+                if (a.textContent < b.textContent)
+                    return -1;
+                if (a.textContent > b.textContent)
+                    return 1;
+                return 0;
+            });
 
-        function reset(){
-            input1.value = 0;
-            input2.value = 0;
+            itemsArray.forEach(item => {
+                list.append(item);
+            });
         }
 
-        function check (){
-            if(!input1.value){
-                input1.style.border = '1px solid red';
-                span1.style.display = 'block';
-            }
-            if(!input2.value){
-                input2.style.border = '1px solid red';
-                span2.style.display = 'block';
-            }
-        }
-
-        function resetWindow(){
-            span1.style.display = 'none';
-            span2.style.display = 'none';
-            input1.style.border = '1px solid black';
-            input2.style.border = '1px solid black';
-        }
-
-        addBtn.addEventListener("click", function () {
-            resetWindow();
-            check();
-            alert(Number(input1.value) + Number(input2.value));
-        });
-
-        remBtn.addEventListener("click", function () {
-            resetWindow();
-            check();
-            alert(input1.value - input2.value);
-        });
-
-        mulBtn.addEventListener("click", function () {
-            resetWindow();
-            check();
-            alert(input1.value * input2.value);
-        });
-
-        divBtn.addEventListener("click", function () {
-            resetWindow();
-            check();
-            alert(input1.value / input2.value);
-        });
-        
     </script>
 </body>
 
