@@ -5,17 +5,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 6.1</title>
+    <title>Task 6.2</title>
 </head>
 
 <body>
-    <button id="testBtn">Test Button</button>
+    <input type="text" id="radius">radius
+    <br>
+    <input type="text" id="height">height
+    <br>
+    <button id="btn">Check</button>
     <script>
-       function handler(){
-        alert('hello world')
-       }
-       let btn = document.querySelector('#testBtn');
-       btn.addEventListener('click', handler);
+        let V;
+        const Pi = 3.14;
+        let rInput = document.querySelector('#radius');
+        let hInput = document.querySelector('#height');
+        let btn = document.querySelector('#btn');
+        let div = document.createElement('div');
+
+        btn.addEventListener('click', volume);
+
+        function volume() {
+            let r = Number(rInput.value);
+            let h = Number(hInput.value);
+            V = Pi * (r ** 2) * h;
+            div.textContent = V;
+            document.body.append(div);
+        }
+
+
     </script>
 </body>
 
