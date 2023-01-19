@@ -5,53 +5,85 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 7.3</title>
+    <title>Task 7.4</title>
     <style>
-        div {
-            display: inline-block;
+        #element {
             width: 100px;
             height: 100px;
-            background-color: green;
-            margin: 10px;
-        }
-
-        .red-class {
-            border: 3px solid red;
+            background-color: greenyellow;
+            position: absolute;
         }
     </style>
 </head>
 
 <body>
-    <div id="div1"></div>
-    <div id="div2"></div>
-    <div id="div3"></div>
+    <div id="element"></div>
 
     <script>
-        let div1 = document.querySelector('#div1');
-        let div2 = document.querySelector('#div2');
-        let div3 = document.querySelector('#div3');
+        /*
+        Задание:
+        Внесите изменения в сценарий. Сделайте чтобы при зажатой клавише Shift и нажатии стрелок на 
+        клавиатуре элемент по странице двигался в два раза быстрей, чем если просто нажимать на стрелки.
+        */
+        let div = document.querySelector("#element");
+        let distance = 10;
 
-        document.addEventListener('keydown', function (e) {
+        document.addEventListener("keydown", function (e) {
             switch (e.code) {
-                case 'Digit1': div1.classList.add('red-class');
+                case "ArrowLeft":
+                    if (e.shiftKey) {
+                        moveLeft(div, distance * 2);
+                    }
+                    else {
+                        moveLeft(div, distance);
+                    }
                     break;
-                case 'Digit2': div2.classList.add('red-class');
+                case "ArrowRight":
+                    if (e.shiftKey) {
+                        moveRight(div, distance * 2);
+                    }
+                    else {
+                        moveRight(div, distance);
+                    }
                     break;
-                case 'Digit3': div3.classList.add('red-class');
+                case "ArrowUp":
+                    if (e.shiftKey) {
+                        moveUp(div, distance * 2);
+                    }
+                    else {
+                        moveUp(div, distance);
+                    }
                     break;
-                case 'KeyA': if(e.ctrlKey){
-                    div3.classList.add('red-class');
-                    div1.classList.add('red-class');
-                    div2.classList.add('red-class');
-                }
+                case "ArrowDown":
+                    if (e.shiftKey) {
+                        moveDown(div, distance * 2);
+                    }
+                    else {
+                        moveDown(div, distance);
+                    }
+                    break;
             }
+        });
 
-        })
-        document.addEventListener('keyup', function(){
-            div1.classList.remove('red-class');
-            div2.classList.remove('red-class');
-            div3.classList.remove('red-class');
-        })
+        function moveUp(element, distance) {
+            let top = getComputedStyle(element).top;
+            element.style.top = parseInt(top) - distance + "px";
+        }
+
+        function moveDown(element, distance) {
+            let top = getComputedStyle(element).top;
+            element.style.top = parseInt(top) + distance + "px";
+        }
+
+        function moveLeft(element, distance) {
+            let left = getComputedStyle(element).left;
+            element.style.left = parseInt(left) - distance + "px";
+        }
+
+        function moveRight(element, distance) {
+            let left = getComputedStyle(element).left;
+            element.style.left = parseInt(left) + distance + "px";
+        }
     </script>
 </body>
 
