@@ -5,25 +5,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 8.3</title>
+    <title>Task 8.4</title>
 </head>
 
 <body>
-    <button>Кнопка 1</button>
-    <button>Кнопка 2</button>
-    <button>Кнопка 3</button>
+    Операнд 1: <input id="input1" type="text"> <br />
+    Операнд 2: <input id="input2" type="text"> <br />
+
+    <button id="add-btn">+</button>
+    <button id="rem-btn">-</button>
+    <button id="mul-btn">*</button>
+    <button id="div-btn">/</button>
+
     <script>
         let body = document.querySelector('body');
-        body.addEventListener('click', clickHandler);
+        let input1 = document.querySelector("#input1");
+        let input2 = document.querySelector("#input2");
+        
+        body.addEventListener('click', chekButton);
 
-        function clickHandler(e) {
+        function chekButton(e) {
             if (e.target.tagName == 'BUTTON') {
-                alert(e.target.innerText);
-            }
-            else{
-                return;
+                tar = e.target.id;
+                switch (e.target.id) {
+                    case 'add-btn': add();
+                        break;
+                    case 'rem-btn': rem();
+                        break;
+                    case 'mul-btn': mul();
+                        break;
+                    case 'div-btn': div();
+                        break;
+                }
             }
         }
+
+        function add() {
+            alert(Number(input1.value) + Number(input2.value));
+        };
+
+        function rem() {
+            alert(input1.value - input2.value);
+        };
+
+        function mul() {
+            alert(input1.value * input2.value);
+        };
+
+        function div() {
+            alert(input1.value / input2.value);
+        };
     </script>
 </body>
 
