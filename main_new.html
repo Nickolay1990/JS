@@ -5,56 +5,112 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 8.4</title>
+    <title>Task 8.5</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #generateButton {
+            height: 5vh;
+            background-color: green;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            font-size: 24px;
+
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+        }
+
+        #interactivePanel {
+            position: relative;
+            height: 95vh;
+        }
+
+        .interactiveElement {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
 </head>
 
 <body>
-    Операнд 1: <input id="input1" type="text"> <br />
-    Операнд 2: <input id="input2" type="text"> <br />
-
-    <button id="add-btn">+</button>
-    <button id="rem-btn">-</button>
-    <button id="mul-btn">*</button>
-    <button id="div-btn">/</button>
-
+    <div id="generateButton">Generate</div>
+    <div id="interactivePanel"></div>
     <script>
-        let body = document.querySelector('body');
-        let input1 = document.querySelector("#input1");
-        let input2 = document.querySelector("#input2");
-        
-        body.addEventListener('click', chekButton);
+        let generateButton = document.querySelector('#generateButton');
+        let panel = document.querySelector('#interactivePanel');
+        let move = false;
+        let offsetX;
+        let offsetY;
+        let currentDiv;
 
-        function chekButton(e) {
-            if (e.target.tagName == 'BUTTON') {
-                tar = e.target.id;
-                switch (e.target.id) {
-                    case 'add-btn': add();
-                        break;
-                    case 'rem-btn': rem();
-                        break;
-                    case 'mul-btn': mul();
-                        break;
-                    case 'div-btn': div();
-                        break;
-                }
+        generateButton.addEventListener('click', times100);
+        panel.addEventListener('mousedown', function (e) {
+            move = true;
+            offsetX = e.offsetX;
+            offsetY = e.offsetY;
+            currentDiv = e.target;
+        });
+
+        panel.addEventListener('mousemove', function (e) {
+            if (move) {
+                currentDiv.style.top = e.clientY - offsetY + 'px';
+                currentDiv.style.left = e.clientX - offsetX + 'px';
+            }
+        });
+
+
+        panel.addEventListener('mouseup', function (e) {
+            move = false;
+        });
+
+
+        /*САМ НЕ РЕШИЛ*/
+
+        function times100() {
+            if (panel.innerHTML.length > 0) {
+                panel.innerHTML = '';
+            }
+            for (let i = 0; i < 100; i++) {
+                let div = generateElement();
+                panel.append(div);
             }
         }
 
-        function add() {
-            alert(Number(input1.value) + Number(input2.value));
-        };
 
-        function rem() {
-            alert(input1.value - input2.value);
-        };
+        function generateElement() {
+            let div = document.createElement("div");
+            div.classList.add("interactiveElement");
+            let maxLeft = window.innerWidth - 50;
+            let maxTop = window.innerHeight - 150;
+            div.style.top = getRandomValue(maxTop) + "px";
+            div.style.left = getRandomValue(maxLeft) + "px";
+            div.style.backgroundColor = getRandomColor();
+            return div;
+        }
 
-        function mul() {
-            alert(input1.value * input2.value);
-        };
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[getRandomValue(16)];
+            }
+            return color;
+        }
 
-        function div() {
-            alert(input1.value / input2.value);
-        };
+        function getRandomValue(max) {
+            return Math.floor(Math.random() * max);
+        }
     </script>
 </body>
 
