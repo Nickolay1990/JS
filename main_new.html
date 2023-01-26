@@ -5,111 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 8.5</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        #generateButton {
-            height: 5vh;
-            background-color: green;
-            color: white;
-            cursor: pointer;
-            text-align: center;
-            font-size: 24px;
-
-            display: flex;
-            justify-content: center;
-            align-content: center;
-            flex-direction: column;
-        }
-
-        #interactivePanel {
-            position: relative;
-            height: 95vh;
-        }
-
-        .interactiveElement {
-            position: absolute;
-            width: 50px;
-            height: 50px;
-        }
-    </style>
+    <title>Task 9.1</title>
 </head>
 
 <body>
-    <div id="generateButton">Generate</div>
-    <div id="interactivePanel"></div>
+    <template id="template">
+        <div>
+            Название книги: <span id="titlePlaceholder"></span> <br />
+            Автор: <span id="authorPlaceholder"></span>
+            <hr />
+        </div>
+    </template>
+
     <script>
-        let generateButton = document.querySelector('#generateButton');
-        let panel = document.querySelector('#interactivePanel');
-        let move = false;
-        let offsetX;
-        let offsetY;
-        let currentDiv;
-
-        generateButton.addEventListener('click', times100);
-        panel.addEventListener('mousedown', function (e) {
-            move = true;
-            offsetX = e.offsetX;
-            offsetY = e.offsetY;
-            currentDiv = e.target;
-        });
-
-        panel.addEventListener('mousemove', function (e) {
-            if (move) {
-                currentDiv.style.top = e.clientY - offsetY + 'px';
-                currentDiv.style.left = e.clientX - offsetX + 'px';
+        let books = [
+            {
+                title: "JavaScript. Полное руководство 7-е издание",
+                author: "Дэвид Флэнаган"
+            },
+            {
+                title: "JavaScript. Шаблоны",
+                author: "Стоян Стефанов"
+            },
+            {
+                title: "Секреты JavaScript ниндзя",
+                author: "Секреты JavaScript ниндзя"
             }
-        });
+        ];
+
+        let template = document.querySelector('#template');
 
 
-        panel.addEventListener('mouseup', function (e) {
-            move = false;
-        });
-
-
-        /*САМ НЕ РЕШИЛ*/
-
-        function times100() {
-            if (panel.innerHTML.length > 0) {
-                panel.innerHTML = '';
-            }
-            for (let i = 0; i < 100; i++) {
-                let div = generateElement();
-                panel.append(div);
-            }
-        }
-
-
-        function generateElement() {
-            let div = document.createElement("div");
-            div.classList.add("interactiveElement");
-            let maxLeft = window.innerWidth - 50;
-            let maxTop = window.innerHeight - 150;
-            div.style.top = getRandomValue(maxTop) + "px";
-            div.style.left = getRandomValue(maxLeft) + "px";
-            div.style.backgroundColor = getRandomColor();
-            return div;
-        }
-
-        function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[getRandomValue(16)];
-            }
-            return color;
-        }
-
-        function getRandomValue(max) {
-            return Math.floor(Math.random() * max);
+        for (const book of books) {
+            var clone = template.content.cloneNode(true);
+            clone.querySelector('#titlePlaceholder').textContent = book.title;
+            clone.querySelector('#authorPlaceholder').textContent = book.author;
+            document.body.append(clone);
         }
     </script>
 </body>
