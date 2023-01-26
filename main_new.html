@@ -5,44 +5,124 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 9.2</title>
+    <title>Task 9.3</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .task-list {
+            width: 500px;
+        }
+
+        #start-message {
+            margin: 10px;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            border: 1px solid gray;
+            padding: 3px 8px;
+            margin: 2px 10px;
+        }
+
+        .task p {
+            margin-left: 4px;
+        }
+
+        .completed {
+            background-color: green;
+            color: white;
+        }
+
+        .completed p {
+            text-decoration: line-through;
+        }
+
+        .input-panel {
+            width: 500px;
+            margin: 8px;
+            padding: 2px;
+        }
+
+        .input-panel button {
+            padding: 4px;
+            width: 25%;
+        }
+
+        .input-panel input {
+            height: 23px;
+            padding-left: 4px;
+            width: 68%;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="input-panel">
+        <input type="text" id="task-name-input">
+        <button id="add-task-btn">Добавить задачу</button>
+    </div>
+
+    <div class="task-list">
+        <p id="start-message">Нет новых задач</p>
+    </div>
+
     <template id="template">
-        <div>
-            Название книги: <span>{{title}}</span> <br />
-            Автор: <span>{{author}}</span>
-            <hr />
+        <div class="task">
+            <input type="checkbox">
+            <p></p>
         </div>
     </template>
 
-    <script src="mustache.min.js"></script>
     <script>
-        let books = [
-            {
-                title: "JavaScript. Полное руководство 7-е издание",
-                author: "Дэвид Флэнаган"
-            },
-            {
-                title: "JavaScript. Шаблоны",
-                author: "Стоян Стефанов"
-            },
-            {
-                title: "Секреты JavaScript ниндзя",
-                author: "Секреты JavaScript ниндзя"
+        let taskNameInput = document.querySelector("#task-name-input");
+        let addTaskButton = document.querySelector("#add-task-btn");
+        let startMessage = document.querySelector("#start-message");
+        let taskList = document.querySelector(".task-list");
+
+
+        addTaskButton.addEventListener("click", addTaskHandler);
+        taskList.addEventListener("click", changeTaskState);
+
+        function createTask(text) {
+            let template = document.querySelector('#template');
+            let clone = template.content.cloneNode(true);
+            clone.querySelector('p').textContent = text;
+            return clone;
+        }
+
+        function changeTaskState(e) {
+            if (e.target.nodeName != "input" && e.target.type != "checkbox") {
+                return;
             }
-        ];
 
+            if (e.target.checked) {
+                e.target.parentElement.classList.add("completed");
+            } else {
+                e.target.parentElement.classList.remove("completed");
+            }
+        }
 
-        for (const book of books){
-            let template = document.querySelector('#template').innerHTML;
-            let nameOfBook = book.title;
-            let nameOfAuthor = book.author;
-            let renderedBook = Mustache.render(template, {title: nameOfBook, author: nameOfAuthor});
-            document.body.insertAdjacentHTML('beforeend', renderedBook);
+        function addTaskHandler() {
+            if (taskNameInput.value) {
+                if (!startMessage.hidden) startMessage.hidden = true;
+
+                let newTask = createTask(taskNameInput.value);
+                taskList.append(newTask);
+                taskNameInput.value = "";
+            } else {
+                alert("введите имя задачи");
+            }
         }
     </script>
+
 </body>
 
 </html>
