@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 9.1</title>
+    <title>Task 9.2</title>
 </head>
 
 <body>
     <template id="template">
         <div>
-            Название книги: <span id="titlePlaceholder"></span> <br />
-            Автор: <span id="authorPlaceholder"></span>
+            Название книги: <span>{{title}}</span> <br />
+            Автор: <span>{{author}}</span>
             <hr />
         </div>
     </template>
 
+    <script src="mustache.min.js"></script>
     <script>
         let books = [
             {
@@ -33,14 +34,13 @@
             }
         ];
 
-        let template = document.querySelector('#template');
 
-
-        for (const book of books) {
-            var clone = template.content.cloneNode(true);
-            clone.querySelector('#titlePlaceholder').textContent = book.title;
-            clone.querySelector('#authorPlaceholder').textContent = book.author;
-            document.body.append(clone);
+        for (const book of books){
+            let template = document.querySelector('#template').innerHTML;
+            let nameOfBook = book.title;
+            let nameOfAuthor = book.author;
+            let renderedBook = Mustache.render(template, {title: nameOfBook, author: nameOfAuthor});
+            document.body.insertAdjacentHTML('beforeend', renderedBook);
         }
     </script>
 </body>
