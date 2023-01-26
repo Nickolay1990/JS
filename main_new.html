@@ -3,126 +3,78 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 9.3</title>
+    <title>Task 9.4</title>
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
-
-        body {
+       body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .task-list {
-            width: 500px;
+        table,
+        th,
+        td {
+            border: 1px solid black;
         }
 
-        #start-message {
-            margin: 10px;
-        }
-
-        .task {
-            display: flex;
-            align-items: center;
-            border: 1px solid gray;
-            padding: 3px 8px;
-            margin: 2px 10px;
-        }
-
-        .task p {
-            margin-left: 4px;
-        }
-
-        .completed {
-            background-color: green;
-            color: white;
-        }
-
-        .completed p {
-            text-decoration: line-through;
-        }
-
-        .input-panel {
-            width: 500px;
-            margin: 8px;
-            padding: 2px;
-        }
-
-        .input-panel button {
-            padding: 4px;
-            width: 25%;
-        }
-
-        .input-panel input {
-            height: 23px;
-            padding-left: 4px;
-            width: 68%;
+        td, th {
+            padding: 8px;
         }
     </style>
 </head>
 
 <body>
-    <div class="input-panel">
-        <input type="text" id="task-name-input">
-        <button id="add-task-btn">Добавить задачу</button>
-    </div>
-
-    <div class="task-list">
-        <p id="start-message">Нет новых задач</p>
-    </div>
-
     <template id="template">
-        <div class="task">
-            <input type="checkbox">
-            <p></p>
-        </div>
+        <tr>
+            <td id="month"></td>
+            <td id="amount"></td>
+        </tr>
     </template>
+    <table>
+        
+    </table>
+    
 
     <script>
-        let taskNameInput = document.querySelector("#task-name-input");
-        let addTaskButton = document.querySelector("#add-task-btn");
-        let startMessage = document.querySelector("#start-message");
-        let taskList = document.querySelector(".task-list");
-
-
-        addTaskButton.addEventListener("click", addTaskHandler);
-        taskList.addEventListener("click", changeTaskState);
-
-        function createTask(text) {
-            let template = document.querySelector('#template');
+        let source = [
+            {
+                month: "Январь",
+                amount: 20
+            },
+            {
+                month: "Февраль",
+                amount: 140
+            },
+            {
+                month: "Март",
+                amount: 115
+            },
+            {
+                month: "Апрель",
+                amount: 100
+            },
+            {
+                month: "Март",
+                amount: 80
+            },
+            {
+                month: "Июнь",
+                amount: 90
+            },
+            {
+                month: "Июль",
+                amount: 100
+            }
+        ];
+        let template = document.querySelector('#template');
+        let table = document.querySelector('table');
+        for(const i of source){
             let clone = template.content.cloneNode(true);
-            clone.querySelector('p').textContent = text;
-            return clone;
+            clone.querySelector('#month').textContent = i.month;
+            clone.querySelector('#amount').textContent = i.amount;
+            table.append(clone);
         }
 
-        function changeTaskState(e) {
-            if (e.target.nodeName != "input" && e.target.type != "checkbox") {
-                return;
-            }
-
-            if (e.target.checked) {
-                e.target.parentElement.classList.add("completed");
-            } else {
-                e.target.parentElement.classList.remove("completed");
-            }
-        }
-
-        function addTaskHandler() {
-            if (taskNameInput.value) {
-                if (!startMessage.hidden) startMessage.hidden = true;
-
-                let newTask = createTask(taskNameInput.value);
-                taskList.append(newTask);
-                taskNameInput.value = "";
-            } else {
-                alert("введите имя задачи");
-            }
-        }
     </script>
-
 </body>
 
 </html>
