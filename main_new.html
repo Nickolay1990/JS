@@ -5,65 +5,152 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 11.3</title>
-
+    <title>Task 11.4</title>
     <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .car-info {
-            display: inline-block;
-            margin: 10px 0 10px 10px;
+        .task-list {
+            width: 500px;
+        }
+
+        #start-message {
+            margin: 10px;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            border: 1px solid gray;
+            padding: 3px 8px;
+            margin: 2px 10px;
+        }
+
+        .task p {
+            margin-left: 4px;
+        }
+
+        .completed {
+            background-color: green;
+            color: white;
+        }
+
+        .completed p {
+            text-decoration: line-through;
+        }
+
+        .input-panel {
+            width: 500px;
+            margin: 8px;
+            padding: 2px;
+        }
+
+        .input-panel button {
+            padding: 4px;
+            width: 25%;
+        }
+
+        .input-panel input {
+            height: 23px;
+            padding-left: 4px;
+            width: 68%;
         }
     </style>
 </head>
 
 <body>
-    <div class="car-info" id="placeholder1"></div>
-    <div class="car-info" id="placeholder2"></div>
-    <div class="car-info" id="placeholder3"></div>
+    <div class="input-panel">
+        <input type="text" id="task-name-input">
+        <button id="add-task-btn">Добавить задачу</button>
+        <button id="noCompleted">Show</button>
+        <button id="showAll">Show all</button>
+
+    </div>
+    <div class="task-list">
+        <p id="start-message">Нет новых задач</p>
+    </div>
 
     <script>
-        class Car {
-            #image;
-            #manufacturer;
-            #html;
+        let taskNameInput = document.querySelector("#task-name-input");
+        let addTaskButton = document.querySelector("#add-task-btn");
+        let startMessage = document.querySelector("#start-message");
+        let taskList = document.querySelector(".task-list");
+        let show = document.querySelector('#noCompleted');
+        let showAll = document.querySelector('#showAll');
+        let tasks = [];
 
-            constructor(image, manufacturer) {
-                this.#image = image;
-                this.#manufacturer = manufacturer;
-                this.#html = `<img src="images/${this.#image}" /><br />Developer: ${this.#manufacturer}<br />`;
+        addTaskButton.addEventListener("click", addTaskHandler);
+        showAll.addEventListener('click', showAllElements);
+        show.addEventListener('click', showNocompleted);
+        taskNameInput.addEventListener("keydown", function (e) {
+            if (e.code == "Enter") addTaskHandler();
+        })
 
-            }
-            get image() {
-                return this.#image;
-            }
-            set image(value) {
-                this.#image = value;
-            }
-            get manufacturer() {
-                return this.#manufacturer;
-            }
-            set manufacturer(value) {
-                this.#manufacturer = value;
-            }
-            getHtml(){
-                return this.#html;
+
+        function showNocompleted(){
+            taskList.innerHTML = '';
+            for(let i of tasks){
+                if(i.isDone == false){
+                    taskList.append(i.div);
+                }
             }
         }
-        
-        let car1 = new Car("audi-a6-250.jpg", "Audi");
-        let car2 = new Car("jaguar-x-type-250.jpg", "Jaguar");
-        let car3 = new Car("porsche-carrera-911-250.jpg", "Porsce");
 
-        let placeholder1 = document.querySelector("#placeholder1");
-        let placeholder2 = document.querySelector("#placeholder2");
-        let placeholder3 = document.querySelector("#placeholder3");
+        function showAllElements(){
+            taskList.innerHTML = '';
+            for(let i of tasks){
+                taskList.append(i.div);
+            }
+        }
 
-        placeholder1.innerHTML = car1.getHtml();
-        placeholder2.innerHTML = car2.getHtml();
-        placeholder3.innerHTML = car3.getHtml();
+        function addTaskHandler() {
+            if (taskNameInput.value) {
+                if (!startMessage.hidden) startMessage.hidden = true;
+
+                let newTask = new Task(taskNameInput.value);
+                newTask.createIn(taskList);
+                newTask.isDone = true;
+                tasks.push(newTask);
+                taskNameInput.value = "";
+            } else {
+                alert("введите имя задачи");
+            }
+        }
+
+        class Task {
+            constructor(text) {
+                this.text = text;
+                this.isDone = false;
+                this.div = null;
+            }
+
+            createIn(element) {
+                this.div = document.createElement("div");
+                this.div.classList.add("task");
+
+                let input = document.createElement("input");
+                input.addEventListener("click", () => this.changeState(this.div));
+                input.type = "checkbox";
+
+                let p = document.createElement("p");
+                p.innerText = this.text;
+
+                this.div.append(input);
+                this.div.append(p);
+                element.append(this.div);
+            }
+
+            changeState(element) {
+                this.isDone = !this.isDone;
+                element.classList.toggle("completed");
+            }
+        }
     </script>
 </body>
 
