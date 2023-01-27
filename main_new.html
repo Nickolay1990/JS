@@ -5,27 +5,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 11.2</title>
+    <title>Task 11.3</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .car-info {
+            display: inline-block;
+            margin: 10px 0 10px 10px;
+        }
+    </style>
 </head>
 
 <body>
-    <script>
-        class Celinder {
-            constructor(height, radius) {
-                this.height = height;
-                this.radius = radius;
-            }
+    <div class="car-info" id="placeholder1"></div>
+    <div class="car-info" id="placeholder2"></div>
+    <div class="car-info" id="placeholder3"></div>
 
-            getVolume() {
-                return 3.14 * (this.radius ** 2) * this.height;
+    <script>
+        class Car {
+            #image;
+            #manufacturer;
+            #html;
+
+            constructor(image, manufacturer) {
+                this.#image = image;
+                this.#manufacturer = manufacturer;
+                this.#html = `<img src="images/${this.#image}" /><br />Developer: ${this.#manufacturer}<br />`;
+
+            }
+            get image() {
+                return this.#image;
+            }
+            set image(value) {
+                this.#image = value;
+            }
+            get manufacturer() {
+                return this.#manufacturer;
+            }
+            set manufacturer(value) {
+                this.#manufacturer = value;
+            }
+            getHtml(){
+                return this.#html;
             }
         }
+        
+        let car1 = new Car("audi-a6-250.jpg", "Audi");
+        let car2 = new Car("jaguar-x-type-250.jpg", "Jaguar");
+        let car3 = new Car("porsche-carrera-911-250.jpg", "Porsce");
 
-        let c1 = new Celinder(10, 10);
-        let c2 = new Celinder(20, 20);
+        let placeholder1 = document.querySelector("#placeholder1");
+        let placeholder2 = document.querySelector("#placeholder2");
+        let placeholder3 = document.querySelector("#placeholder3");
 
-        console.log(c1.getVolume());
-        console.log(c2.getVolume());
+        placeholder1.innerHTML = car1.getHtml();
+        placeholder2.innerHTML = car2.getHtml();
+        placeholder3.innerHTML = car3.getHtml();
     </script>
 </body>
 
