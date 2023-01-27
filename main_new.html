@@ -5,152 +5,64 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 11.4</title>
+    <title>Task 11.5</title>
+
     <style>
-        * {
-            padding: 0;
+        p {
             margin: 0;
+            padding: 0;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .task-list {
-            width: 500px;
-        }
-
-        #start-message {
+        .report-block {
+            border: 1px solid green;
+            background-color: #00800049;
             margin: 10px;
-        }
-
-        .task {
-            display: flex;
-            align-items: center;
-            border: 1px solid gray;
-            padding: 3px 8px;
-            margin: 2px 10px;
-        }
-
-        .task p {
-            margin-left: 4px;
-        }
-
-        .completed {
-            background-color: green;
-            color: white;
-        }
-
-        .completed p {
-            text-decoration: line-through;
-        }
-
-        .input-panel {
-            width: 500px;
-            margin: 8px;
-            padding: 2px;
-        }
-
-        .input-panel button {
-            padding: 4px;
-            width: 25%;
-        }
-
-        .input-panel input {
-            height: 23px;
-            padding-left: 4px;
-            width: 68%;
+            padding: 10px;
         }
     </style>
 </head>
 
 <body>
-    <div class="input-panel">
-        <input type="text" id="task-name-input">
-        <button id="add-task-btn">Добавить задачу</button>
-        <button id="noCompleted">Show</button>
-        <button id="showAll">Show all</button>
+    <button>Создать отчет</button>
+    <div id="output"></div>
 
-    </div>
-    <div class="task-list">
-        <p id="start-message">Нет новых задач</p>
-    </div>
+    <template id="monthReport">
+        <div class="report-block">
+            <p>месяц {{month}}</p>
+            <p>сумма {{amount}}</p>
+            <ul></ul>
+            {{#users}}
+            <li>{{.}}</li>
+            {{/users}}
+            </ul>
+        </div>
+    </template>
 
+    <script src="mustache.min.js"></script>
     <script>
-        let taskNameInput = document.querySelector("#task-name-input");
-        let addTaskButton = document.querySelector("#add-task-btn");
-        let startMessage = document.querySelector("#start-message");
-        let taskList = document.querySelector(".task-list");
-        let show = document.querySelector('#noCompleted');
-        let showAll = document.querySelector('#showAll');
-        let tasks = [];
-
-        addTaskButton.addEventListener("click", addTaskHandler);
-        showAll.addEventListener('click', showAllElements);
-        show.addEventListener('click', showNocompleted);
-        taskNameInput.addEventListener("keydown", function (e) {
-            if (e.code == "Enter") addTaskHandler();
-        })
-
-
-        function showNocompleted(){
-            taskList.innerHTML = '';
-            for(let i of tasks){
-                if(i.isDone == false){
-                    taskList.append(i.div);
-                }
+        let template = document.querySelector("#monthReport").innerHTML;
+        let output = document.querySelector("#output");
+        class MonthReport {
+            constructor(month, amount, users) {
+                this.month = month;
+                this.amount = amount;
+                this.users = users;
+            }
+            render(element) {
+                let html = Mustache.render(template, this);
+                element.insertAdjacentHTML("beforeend", html);
             }
         }
 
-        function showAllElements(){
-            taskList.innerHTML = '';
-            for(let i of tasks){
-                taskList.append(i.div);
-            }
-        }
+        let source = [
+            new MonthReport("Январь", 20, ["Claudia Contreras", "Blair Hayden", "Montgomery Cohen"]),
+            new MonthReport("Февраль", 140),
+            new MonthReport("Март", 115, ["Blair Hayden", "Montgomery Cohen"])
+        ];
+        document.querySelector("button").addEventListener("click", function () {
+            source.forEach(report => report.render(output));
+        });
 
-        function addTaskHandler() {
-            if (taskNameInput.value) {
-                if (!startMessage.hidden) startMessage.hidden = true;
-
-                let newTask = new Task(taskNameInput.value);
-                newTask.createIn(taskList);
-                newTask.isDone = true;
-                tasks.push(newTask);
-                taskNameInput.value = "";
-            } else {
-                alert("введите имя задачи");
-            }
-        }
-
-        class Task {
-            constructor(text) {
-                this.text = text;
-                this.isDone = false;
-                this.div = null;
-            }
-
-            createIn(element) {
-                this.div = document.createElement("div");
-                this.div.classList.add("task");
-
-                let input = document.createElement("input");
-                input.addEventListener("click", () => this.changeState(this.div));
-                input.type = "checkbox";
-
-                let p = document.createElement("p");
-                p.innerText = this.text;
-
-                this.div.append(input);
-                this.div.append(p);
-                element.append(this.div);
-            }
-
-            changeState(element) {
-                this.isDone = !this.isDone;
-                element.classList.toggle("completed");
-            }
-        }
     </script>
 </body>
 
