@@ -5,23 +5,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 11.1</title>
+    <title>Task 11.2</title>
 </head>
 
 <body>
     <script>
-        class Car {
-            constructor(model, year) {
-                this.model = model;
-                this.year = year;
+        class Celinder {
+            constructor(height, radius) {
+                this.height = height;
+                this.radius = radius;
             }
 
-            showInfo = function () {
-                console.log(this.model + " " + this.yaer);
+            getVolume() {
+                return 3.14 * (this.radius ** 2) * this.height;
             }
         }
-        let car1 = new Car("Audi", 2018);
-        car1.showInfo();
+
+        let c1 = new Celinder(10, 10);
+        let c2 = new Celinder(20, 20);
+
+        console.log(c1.getVolume());
+        console.log(c2.getVolume());
     </script>
 </body>
 
