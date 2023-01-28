@@ -5,130 +5,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 12.4</title>
-    <style>
-        #catalog {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        #catalog>div {
-            margin: 10px;
-        }
-
-        .bg {
-            width: 250px;
-            height: 300px;
-            background-size: cover;
-        }
-    </style>
+    <title>Task 12.5</title>
 </head>
 
 <body>
-    <div id="catalog"></div>
-
-    <template id="product">
-        <div>
-            <div class="bg" style="background-image: url('{{imagePath}}');"></div>
-            <p id="witout">{{price}}$</p>
-            <p>{{totalPrice}}</p>
-        </div>
-    </template>
-
-    <template id="advertisement">
-        <div>
-            <a href="{{url}}" target="_blank">
-                <div class="bg" style="background-image: url('{{imagePath}}');"></div>
-            </a>
-        </div>
-    </template>
-
-    <script src="mustache.min.js"></script>
-
     <script>
-        class CatalogItem {
-            template;
-            imagePath;
-
-            constructor(image, tempalteSelector) {
-                this.imagePath = image;
-                this.template = document.querySelector(tempalteSelector).innerHTML;
-
+        class Circle {
+            constructor(radius) {
+                this.radius = radius;
             }
 
-            renderIn(element){
-                let html = Mustache.render(this.template, this);
-                element.innerHTML += html;
-                }
+            getArea() {
+                return Math.PI * Math.pow(this.radius, 2);
             }
+        }
+
+        class Cone extends Circle {
+            height;
+
+            constructor(height, radius) {
+                super(radius);
+                this.height = height;
+            }
+            getVolume() {
+                return super.getArea() * this.height;
+            }
+        }
         
-
-        class Product extends CatalogItem {
-            price;
-
-            constructor(imageaPath, price) {
-                super(imageaPath, "#product");
-                this.price = price;
-            }
-        }
-
-        class Advertisement extends CatalogItem {
-            url;
-
-            constructor(imagePath, url) {
-                super(imagePath, "#advertisement");
-                this.url = url;
-            }
-        }
-
-        class Catalog {
-            items = [];
-            element;
-
-            constructor(elementSelector) {
-                this.element = document.querySelector(elementSelector);
-            }
-
-            add(item) {
-                if (item instanceof CatalogItem == true) {
-                    this.items.push(item);
-                }
-                else {
-                    alert("Данный метод принимает только классы производные от CatalogItem");
-                }
-            }
-
-            show() {
-                this.items.forEach(item => {
-                    item.renderIn(this.element);
-                });
-            }
-        }
-
-        class ProductWithDiscount extends Product {
-            discontCoast;
-            discont;
-            totalPrice;
-
-            constructor(imagePath, price, discont) {
-                super(imagePath, price);
-                this.discont = discont;
-                this.discontCoast = (price / 100) * 20;
-                this.totalPrice = price - this.discontCoast;
-            }
-        }
-
-        let catalog = new Catalog("#catalog");
-
-        catalog.add(new Product("images/img1.jpg", 35.55));
-        catalog.add(new Product("images/img2.jpg", 25.25));
-        catalog.add(new Advertisement("images/banner1.jpg", "https://itvdn.com/ru/catalog"));
-        catalog.add(new Product("images/img3.jpg", 14.55));
-        catalog.add(new Product("images/img4.jpg", 65.55));
-        catalog.add(new Advertisement("images/banner2.jpg", "https://itvdn.comru/ru/specialities"));
-        catalog.add(new ProductWithDiscount("images/img4.jpg", 65.55, 20));
-        catalog.show();
-
+        let c1 = new Cone(10, 10);
+        console.log(c1.getVolume());
     </script>
 </body>
 
