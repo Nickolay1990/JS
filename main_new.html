@@ -5,47 +5,159 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 13.3</title>
+    <title>Task 13.4</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .task-list {
+            width: 500px;
+        }
+
+        #start-message {
+            margin: 10px;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            border: 1px solid gray;
+            padding: 3px 8px;
+            margin: 2px 10px;
+        }
+
+        .task p {
+            margin-left: 4px;
+        }
+
+        .completed {
+            background-color: green;
+            color: white;
+        }
+
+        .completed p {
+            text-decoration: line-through;
+        }
+
+        .input-panel {
+            width: 500px;
+            margin: 8px;
+            padding: 2px;
+        }
+
+        .input-panel button {
+            padding: 4px;
+            width: 25%;
+        }
+
+        .input-panel input {
+            height: 23px;
+            padding-left: 4px;
+            width: 68%;
+        }
+    </style>
 </head>
 
 <body>
+    <div class="input-panel">
+        <input type="text" id="task-name-input">
+        <button id="add-task-btn">Добавить задачу</button>
+    </div>
+    <div class="input-panel">
+        <button id="show-all-btn">Все</button>
+        <button id="show-not-completed-btn">Не завершенные</button>
+    </div>
+    <div class="task-list">
+        <p id="start-message">Нет новых задач</p>
+    </div>
+
     <script>
-        class Numbers {
-            #values;
-            #threshold;
+        let taskNameInput = document.querySelector("#task-name-input");
+        let addTaskButton = document.querySelector("#add-task-btn");
+        let startMessage = document.querySelector("#start-message");
+        let showAllButton = document.querySelector("#show-all-btn");
+        let showNotCompletedButton = document.querySelector("#show-not-completed-btn");
+        let taskList = document.querySelector(".task-list");
 
-            constructor(threshold, values) {
-                this.#values = values;
-                this.#threshold = threshold;
-            }
+        let tasks = [];
 
-            getGreaterThanThreshold() {
-                let greaterList = [];
-                for(let i of this.#values){
-                    if(i > this.#threshold){
-                        greaterList.push(i);
-                    }
-                }
-                return greaterList;
-            }
+        addTaskButton.addEventListener("click", addTaskHandler);
+        showAllButton.addEventListener("click", showAllHandler);
+        showNotCompletedButton.addEventListener("click", showNotCompletedHandler);
 
-            getLessThanThreshold() {
-                let lessList = [];
-                for(let i of this.#values){
-                    if(i < this.#threshold){
-                        lessList.push(i);
-                    }
-                }
-                return lessList;
+        taskNameInput.addEventListener("keydown", function (e) {
+            if (e.code == "Enter") addTaskHandler();
+        })
+
+        function addTaskHandler() {
+            if (taskNameInput.value) {
+                if (!startMessage.hidden) startMessage.hidden = true;
+
+                let newTask = new Task(taskNameInput.value);
+                newTask.createIn(taskList);
+                tasks.push(newTask);
+
+                taskNameInput.value = "";
+            } else {
+                alert("введите имя задачи");
             }
         }
 
-        let numbers = new Numbers(50, [10, 20, 23, 11, 5, 6, 90, 33, 45, 67]);
-        let gt = numbers.getGreaterThanThreshold();
-        let lt = numbers.getLessThanThreshold();
+        function showAllHandler() {
+            taskList.innerHTML = "";
+            tasks.forEach(task => {
+                task.createIn(taskList);
+            });
+        }
 
-        console.log(gt);
-        console.log(lt);
+        function showNotCompletedHandler() {
+            taskList.innerHTML = "";
+            tasks
+                .filter(task => task.isDone == false)
+                .forEach(task => {
+                    task.createIn(taskList);
+                });
+        }
+
+        class Task {
+            constructor(text) {
+                this.text = text;
+                this.isDone = false;
+                this.div = null;
+            }
+
+            createIn(element) {
+                this.div = document.createElement("div");
+                this.div.classList.add("task");
+
+                let input = document.createElement("input");
+                input.addEventListener("click", this.changeState.bind(this));
+                input.type = "checkbox";
+
+                let p = document.createElement("p");
+                p.innerText = this.text;
+
+                this.div.append(input);
+                this.div.append(p);
+
+                if (this.isDone) {
+                    this.div.classList.add("completed");
+                    input.checked = true;
+                }
+                element.append(this.div);
+            }
+
+            changeState(element) {
+                this.isDone = !this.isDone;
+                this.div.classList.toggle("completed");
+            }
+        }
     </script>
 </body>
 
