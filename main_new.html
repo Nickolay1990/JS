@@ -5,41 +5,47 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 13.2</title>
+    <title>Task 13.3</title>
 </head>
 
 <body>
     <script>
-        function showWithDelay1(array) {
-            let i = 0;
-            let timer = setInterval(() => {
-                console.log(array[i]);
-                i++;
-                if (i == array.length) {
-                    clearInterval(timer);
-                }
-            }, 1000);
-        }
-        
-        test = [1, 2, 3, 4, 5];
+        class Numbers {
+            #values;
+            #threshold;
 
-       showWithDelay1(test);
-
-        //=========================================================== Сам не решил!!!!
-
-
-        function showWithDelay1(array){
-            function show(element){
-                console.log(array[element]);
-                element++;
-                if(element < array.length){
-                    setTimeout(show, 1000, element);
-                }
+            constructor(threshold, values) {
+                this.#values = values;
+                this.#threshold = threshold;
             }
-            show(0);
+
+            getGreaterThanThreshold() {
+                let greaterList = [];
+                for(let i of this.#values){
+                    if(i > this.#threshold){
+                        greaterList.push(i);
+                    }
+                }
+                return greaterList;
+            }
+
+            getLessThanThreshold() {
+                let lessList = [];
+                for(let i of this.#values){
+                    if(i < this.#threshold){
+                        lessList.push(i);
+                    }
+                }
+                return lessList;
+            }
         }
 
-        showWithDelay1(test);
+        let numbers = new Numbers(50, [10, 20, 23, 11, 5, 6, 90, 33, 45, 67]);
+        let gt = numbers.getGreaterThanThreshold();
+        let lt = numbers.getLessThanThreshold();
+
+        console.log(gt);
+        console.log(lt);
     </script>
 </body>
 
