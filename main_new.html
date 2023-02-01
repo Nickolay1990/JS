@@ -5,59 +5,40 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 14.3</title>
-    <style>
-        body {
-            font-family: Helvetica, Arial, sans-serif;
-            font-size: 16px;
-        }
-    </style>
+    <title>Task 14.4</title>
 </head>
 
 <body>
-    <p id="para">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita nemo nam amet velit ut explicabo nisi voluptas
-        dicta ad, autem, id asperiores rem corporis esse. Dignissimos dicta facilis eaque mollitia.
-    </p>
-
-    <a href="#" id="size-16">16</a>
-    <a href="#" id="size-24">24</a>
-    <a href="#" id="size-32">32</a>
-
-    <a href="#" id="r">red</a>
-    <a href="#" id="g">green</a>
-    <a href="#" id="b">blue</a>
-
     <script>
-        function makeSizer(size) {
-            return function () {
-                document.body.style.fontSize = size + 'px';
-            };
-        }
-
-        function makeColor(color){
-            return function(){
-                p.style.color = color; 
+        /*
+        Задание:
+        Используя IIFE избавьтесь от глобальных идентификаторов в коде.
+        Убедитесь в том, что глобальных идентификаторов нет, выполнив код после 25 строки
+        */
+        let qwer = (function () {
+            let exampleName1 = 'test1';
+            let exampleName2 = 'test2';
+            return {
+                testFunc: function () {
+                    console.log("This is test function " + exampleName1 + ' ' + exampleName2); 
+                },
+                setExample1: function(val){
+                    exampleName1 = val;
+                },
+                setExample2: function(val){
+                    exampleName2 = val;
+                },
             }
-        }
+        }());
 
-        let p = document.querySelector('#para')
 
-        let colorRed = makeColor('red');
-        let colorGreen = makeColor('green');
-        let colorBlue = makeColor('blue');
+        qwer.testFunc();
+        console.log(globalThis.exampleName1);
+        console.log(globalThis.exampleName2);
+        console.log(exampleName2);
 
-        let size16 = makeSizer(16);
-        let size24 = makeSizer(24);
-        let size32 = makeSizer(43);
-
-        document.querySelector("#size-16").onclick = size16;
-        document.querySelector("#size-24").onclick = size24;
-        document.querySelector("#size-32").onclick = size32;
-
-        document.querySelector('#r').addEventListener('click', colorRed);
-        document.querySelector('#g').addEventListener('click', colorGreen);
-        document.querySelector('#b').addEventListener('click', colorBlue);
+        globalThis.testFunc();
+        testFunc();
     </script>
 </body>
 
