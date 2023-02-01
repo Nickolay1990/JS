@@ -5,53 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 13.5</title>
+    <title>Task 14.1</title>
 </head>
 
 <body>
-    <div id="output">
-        Я загадал случайное значение от 0 до 100
-    </div>
-    <input type="text" id="input" autofocus>
-    <button id="checkBtn">Check</button>
     <script>
-        let output = document.querySelector('#output');
-        let button = document.querySelector('#checkBtn');
-        let input = document.querySelector('#input');
-        let attemps = 0;
-        let time = 0;
-        let randomValue = Math.floor(Math.random() * 101);
-        let timerId = setInterval(timePlus, 1000);
-
-        button.addEventListener('click', check);
-        input.addEventListener('keydown', function (e) {
-            if (e.code == 'Enter') {
-                check();
-            }
-        })
-
-
-        function check() {
-            attemps++;
-            let userValue = Number(input.value);
-            if (userValue > randomValue) {
-                output.textContent = `Я загадал значение меньше чем ${userValue}`;
-                input.value = '';
-            }
-            else if (userValue < randomValue) {
-                output.textContent = `Я загадал значение больше чем ${userValue}`;
-                input.value = '';
-            }
-            else {
-                output.textContent = `Правильно! загаданное значение ${randomValue}. Вы угадали с ${attemps} попытки за ${time} секунд`;
-                input.value = '';
+        /*
+        Задание:
+        Перепишите следующий код так, чтобы он работал в любой среде выполнения (браузер, node.js и т.д.)
+        */
+        if (!globalThis.calc) {
+            globalThis.calc = function (x, y) {
+                alert(x + y);
             }
         }
 
-        function timePlus() {
-            time++;
-        }
-
+        calc(10, 20);
     </script>
 </body>
 
