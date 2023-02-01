@@ -5,40 +5,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 14.4</title>
+    <title>Task 14.5</title>
 </head>
 
 <body>
     <script>
-        /*
-        Задание:
-        Используя IIFE избавьтесь от глобальных идентификаторов в коде.
-        Убедитесь в том, что глобальных идентификаторов нет, выполнив код после 25 строки
-        */
-        let qwer = (function () {
-            let exampleName1 = 'test1';
-            let exampleName2 = 'test2';
+        function firstFunction(values, threshold) {
+            let valuesPriv = values;
+            let thresholdPriv = threshold;
             return {
-                testFunc: function () {
-                    console.log("This is test function " + exampleName1 + ' ' + exampleName2); 
+                getGreaterThanThreshold: function () {
+                    return values.filter(i => i > threshold);
                 },
-                setExample1: function(val){
-                    exampleName1 = val;
+                getLessThanThreshold: function () {
+                    return values.filter(i => i < threshold);
                 },
-                setExample2: function(val){
-                    exampleName2 = val;
-                },
+                addNumber: function(val){
+                    valuesPriv.push(val);
+                }
             }
-        }());
+        }
 
-
-        qwer.testFunc();
-        console.log(globalThis.exampleName1);
-        console.log(globalThis.exampleName2);
-        console.log(exampleName2);
-
-        globalThis.testFunc();
-        testFunc();
+        let numbers = firstFunction([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5);
+        numbers.addNumber(14);
+        console.log(numbers.getGreaterThanThreshold());
+        console.log(numbers.getLessThanThreshold());
     </script>
 </body>
 
