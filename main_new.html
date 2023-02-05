@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 15.4</title>
+    <title>Task 15.5</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -61,29 +61,31 @@
     <form id="output">
         <div class="form-group">
             <label for="firstName">Имя</label>
-            <input type="text" name="firstName">
+            <input type="text" name="firstName" id="firstName">
         </div>
         <div class="form-group">
             <label for="lastName">Фамилия</label>
-            <input type="text" name="lastName">
+            <input type="text" name="lastName" id="lastName">
         </div>
         <div class="form-group">
             <label for="companyName">Компания</label>
-            <input type="text" name="companyName">
+            <input type="text" name="companyName" id="companyName">
         </div>
         <div class="form-group">
             <label for="balance">Баланс</label>
-            <input type="number" name="balance">
+            <input type="number" name="balance" id="balance">
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" name="email">
+            <input type="email" name="email" id="email">
         </div>
         <div class="form-group">
             <label for="age">Возраст</label>
-            <input type="number" name="age">
+            <input type="number" name="age" id="age">
         </div>
         <input type="button" value="Save" id="saveButton">
+        <input type="button" value="Clear" id="clearButton">
+        <input type="button" value="Delete" id="deleteButton">
     </form>
     <script>
         let users = [
@@ -188,7 +190,6 @@
                 email: 'newman.wynn@visalia.name'
             }
         ];
-  
         class ListService {
             selectedData;
             data;
@@ -200,7 +201,7 @@
 
                 for (let index = 0; index < data.length; index++) {
                     const currentData = data[index];
-
+                    
                     let li = document.createElement("li");
                     li.textContent = displayFn(currentData);
                     li.dataset.index = index;
@@ -254,9 +255,12 @@
 
         let userList = document.querySelector("#userList");
         let saveButton = document.querySelector("#saveButton");
+        let clearButton = document.querySelector('#clearButton');
+        let deleteButton = document.querySelector('#deleteButton');
+        let form = document.forms[0];
 
         let listService = new ListService(users, userList, x => x.name.first + " " + x.name.last);
-        let formService = new UserFormService(document.forms[0]);
+        let formService = new UserFormService(form);
 
         userList.addEventListener("click", function (e) {
             if (e.target.tagName != "LI") return;
@@ -267,16 +271,18 @@
         });
 
         saveButton.addEventListener("click", function () {
-            let conf = confirm('Are you sure?')
-            if (conf) {
-                formService.saveForm();
-            }
-            else {
-                formService.fillForm(listService.selectedData);
-            }
-        }
-        );
+            formService.saveForm();
+        });
 
+        clearButton.addEventListener('click', function(){
+            form.reset();
+        });
+
+        deleteButton.addEventListener('click', function(){
+            form.reset();
+            let deleteUserIndex = users.indexOf(formService.currentUser);
+            userList.children[deleteUserIndex].remove();
+        })
     </script>
 </body>
 
