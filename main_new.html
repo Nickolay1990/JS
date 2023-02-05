@@ -5,31 +5,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 14.5</title>
+    <title>Task 15.1</title>
+    <style>
+        .form-grop {
+            margin: 4px;
+        }
+
+        .form-grop label {
+            width: 75px;
+            display: inline-block;
+        }
+    </style>
 </head>
 
 <body>
+    <form>
+        <div class="form-grop">
+            <label>Логин</label>
+            <input type="text" name="loginInput">
+        </div>
+        <div class="form-grop">
+            <label>Пароль</label>
+            <input type="password" name="passwordInput">
+        </div>
+        <div class="form-grop">
+            <label>Имя</label>
+            <input type="text" name="nameInput">
+        </div>
+        <div class="form-grop">
+            <label>Фамилия</label>
+            <input type="text" name="lastNameInput">
+        </div>
+        <div class="form-grop">
+            <input type="button" id="buttonShow" value="Отобразить значения">
+        </div>
+    </form>
     <script>
-        function firstFunction(values, threshold) {
-            let valuesPriv = values;
-            let thresholdPriv = threshold;
-            return {
-                getGreaterThanThreshold: function () {
-                    return values.filter(i => i > threshold);
-                },
-                getLessThanThreshold: function () {
-                    return values.filter(i => i < threshold);
-                },
-                addNumber: function(val){
-                    valuesPriv.push(val);
+        let button = document.querySelector('#buttonShow');
+        let form = document.forms[0];
+
+
+        button.addEventListener('click', function () {
+            show();
+        });
+
+
+        function show() {
+            for (let i of form) {
+                if(i.type != 'button'){
+                    console.log(i.name + ' = ' + i.value);
                 }
             }
         }
-
-        let numbers = firstFunction([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5);
-        numbers.addNumber(14);
-        console.log(numbers.getGreaterThanThreshold());
-        console.log(numbers.getLessThanThreshold());
     </script>
 </body>
 
