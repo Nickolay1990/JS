@@ -5,97 +5,277 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 15.3</title>
+    <title>Task 15.4</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .form-group {
-            margin: 4px 10px;
+        #userList {
+            width: 200px;
             display: inline-block;
         }
 
+        #userList>li {
+            cursor: pointer;
+            list-style: none;
+        }
+
+        #userList>li:hover {
+            background-color: orange;
+        }
+
+        #userList li.selected {
+            background-color: lightcoral;
+        }
+
+        #output {
+            display: inline-block;
+            border: 1px solid gray;
+            padding: 10px;
+            vertical-align: top;
+            margin-top: 20px;
+            width: 300px;
+            min-height: 180px;
+        }
+
+        .form-group {
+            margin-bottom: 4px;
+        }
+
         .form-group label {
-            display: block;
+            width: 85px;
+            display: inline-block;
         }
 
-        [type=button] {
-            margin: 10px;
-        }
-
-        table {
-            margin: 10px
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-
-        td,
-        th {
-            padding: 8px;
+        .form-group input {
+            width: 200px;
         }
     </style>
 </head>
 
 <body>
+    <ul id="userList">
+    </ul>
 
-    <form name="productForm">
+    <form id="output">
         <div class="form-group">
-            <label for="name">Название</label>
-            <input type="text" id="name" name="name">
+            <label for="firstName">Имя</label>
+            <input type="text" name="firstName">
         </div>
-
         <div class="form-group">
-            <label for="price">Цена</label>
-            <input type="text" id="price" name="price">
+            <label for="lastName">Фамилия</label>
+            <input type="text" name="lastName">
         </div>
-
         <div class="form-group">
-            <label for="selectCurrency">Валюта</label>
-            <select name="selectCurrency">
-                <option value="USD">U.S. Dollar</option>
-                <option value="RUB">Russian Ruble</option>
-                <option value="UAH">Ukrainian Hryvnia</option>
-                <option value="EUR">Euro</option>
-                <option value="PLN">Polish Zloty</option>
-                <option value="CHF">Swiss Franc</option>
-            </select>
+            <label for="companyName">Компания</label>
+            <input type="text" name="companyName">
         </div>
-        <br>
-        <input id="saveButton" type="button" value="Сохранить">
+        <div class="form-group">
+            <label for="balance">Баланс</label>
+            <input type="number" name="balance">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="age">Возраст</label>
+            <input type="number" name="age">
+        </div>
+        <input type="button" value="Save" id="saveButton">
     </form>
-
-    <table id="productsTable">
-
-    </table>
-
     <script>
-        let productForm = document.forms.productForm;
-        let productsTable = document.querySelector("#productsTable");
+        let users = [
+            {
+                balance: '1250.89',
+                age: 24,
+                name: {
+                    first: 'Golden',
+                    last: 'Clements'
+                },
+                company: 'EWAVES',
+                email: 'golden.clements@ewaves.io'
+            },
+            {
+                balance: '3637.94',
+                age: 23,
+                name: {
+                    first: 'Francis',
+                    last: 'Hebert'
+                },
+                company: 'XPLOR',
+                email: 'francis.hebert@xplor.biz'
+            },
+            {
+                balance: '1106.44',
+                age: 31,
+                name: {
+                    first: 'Hale',
+                    last: 'Cross'
+                },
+                company: 'EARTHPURE',
+                email: 'hale.cross@earthpure.us'
+            },
+            {
+                balance: '2502.43',
+                age: 25,
+                name: {
+                    first: 'Delores',
+                    last: 'Sykes'
+                },
+                company: 'ASSITIA',
+                email: 'delores.sykes@assitia.com'
+            },
+            {
+                balance: '3651.54',
+                age: 21,
+                name: {
+                    first: 'Ryan',
+                    last: 'Bolton'
+                },
+                company: 'MOLTONIC',
+                email: 'ryan.bolton@moltonic.biz'
+            },
+            {
+                balance: '1345.79',
+                age: 21,
+                name: {
+                    first: 'Carey',
+                    last: 'Schwartz'
+                },
+                company: 'UXMOX',
+                email: 'carey.schwartz@uxmox.info'
+            },
+            {
+                balance: '3261.11',
+                age: 30,
+                name: {
+                    first: 'Trevino',
+                    last: 'Mullins'
+                },
+                company: 'TERRASYS',
+                email: 'trevino.mullins@terrasys.org'
+            },
+            {
+                balance: '1659.17',
+                age: 20,
+                name: {
+                    first: 'Gilliam',
+                    last: 'Mendez'
+                },
+                company: 'ZENTHALL',
+                email: 'gilliam.mendez@zenthall.tv'
+            },
+            {
+                balance: '2340.54',
+                age: 32,
+                name: {
+                    first: 'Brewer',
+                    last: 'Vargas'
+                },
+                company: 'QIMONK',
+                email: 'brewer.vargas@qimonk.co.uk'
+            },
+            {
+                balance: '1736.91',
+                age: 24,
+                name: {
+                    first: 'Newman',
+                    last: 'Wynn'
+                },
+                company: 'VISALIA',
+                email: 'newman.wynn@visalia.name'
+            }
+        ];
+  
+        class ListService {
+            selectedData;
+            data;
+            listElement;
+
+            constructor(data, listElement, displayFn) {
+                this.data = data;
+                this.listElement = listElement;
+
+                for (let index = 0; index < data.length; index++) {
+                    const currentData = data[index];
+
+                    let li = document.createElement("li");
+                    li.textContent = displayFn(currentData);
+                    li.dataset.index = index;
+
+                    this.listElement.append(li);
+                }
+            }
+
+            select(id) {
+                this.selectedData = this.data[id];
+                this.deselectAll();
+                this.listElement.children[id].classList.add("selected");
+            }
+
+            deselectAll() {
+                for (let i = 0; i < this.listElement.children.length; i++) {
+                    const child = this.listElement.children[i];
+                    child.classList.remove("selected");
+                }
+            }
+        }
+
+        class UserFormService {
+            currentUser;
+            form;
+
+            constructor(form) {
+                this.form = form;
+            }
+
+            fillForm(user) {
+                this.currentUser = user;
+
+                this.form.firstName.value = user.name.first;
+                this.form.lastName.value = user.name.last;
+                this.form.companyName.value = user.company;
+                this.form.balance.value = user.balance;
+                this.form.email.value = user.email;
+                this.form.age.value = user.age;
+            }
+
+            saveForm() {
+                this.currentUser.name.first = this.form.firstName.value;
+                this.currentUser.name.last = this.form.lastName.value;
+                this.currentUser.company = this.form.companyName.value;
+                this.currentUser.balance = this.form.balance.value;
+                this.currentUser.email = this.form.email.value;
+                this.currentUser.age = this.form.age.value;
+            }
+        }
+
+        let userList = document.querySelector("#userList");
         let saveButton = document.querySelector("#saveButton");
 
-        saveButton.addEventListener("click", function () {
-            addRow(productForm.name.value,
-                productForm.price.value,
-                productForm.selectCurrency.value);
+        let listService = new ListService(users, userList, x => x.name.first + " " + x.name.last);
+        let formService = new UserFormService(document.forms[0]);
 
-            for (let i = 0; i < productForm.elements.length; i++) {
-                const element = productForm.elements[i];
-                if (element.type == "text") element.value = "";
-            }
+        userList.addEventListener("click", function (e) {
+            if (e.target.tagName != "LI") return;
+
+            const userNumber = e.target.dataset.index;
+            listService.select(userNumber);
+            formService.fillForm(listService.selectedData);
         });
 
-        function addRow(name, price, currency) {
-            let tr = document.createElement("tr");
-            tr.insertAdjacentHTML("beforeend", `<td>${name}</td>`);
-            tr.insertAdjacentHTML("beforeend", `<td>${price}</td>`);
-            tr.insertAdjacentHTML("beforeend", `<td>${currency}</td>`);
-            productsTable.append(tr);
+        saveButton.addEventListener("click", function () {
+            let conf = confirm('Are you sure?')
+            if (conf) {
+                formService.saveForm();
+            }
+            else {
+                formService.fillForm(listService.selectedData);
+            }
         }
+        );
 
     </script>
 </body>
