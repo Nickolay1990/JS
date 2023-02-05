@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 15.2</title>
+    <title>Task 15.3</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -42,7 +42,7 @@
 </head>
 
 <body>
-    
+
     <form name="productForm">
         <div class="form-group">
             <label for="name">Название</label>
@@ -55,14 +55,15 @@
         </div>
 
         <div class="form-group">
-            <label for="quantity">Количество на складе</label>
-            <input type="text" id="quantity" name="quantity">
-        </div>
-
-        <div class="form-group">
-            <label for="price">Валюта</label>
-            <input type="radio" id="currency" name="currency" value="USD" checked> USD
-            <input type="radio" id="currency" name="currency" value="EUR"> EUR
+            <label for="selectCurrency">Валюта</label>
+            <select name="selectCurrency">
+                <option value="USD">U.S. Dollar</option>
+                <option value="RUB">Russian Ruble</option>
+                <option value="UAH">Ukrainian Hryvnia</option>
+                <option value="EUR">Euro</option>
+                <option value="PLN">Polish Zloty</option>
+                <option value="CHF">Swiss Franc</option>
+            </select>
         </div>
         <br>
         <input id="saveButton" type="button" value="Сохранить">
@@ -80,8 +81,7 @@
         saveButton.addEventListener("click", function () {
             addRow(productForm.name.value,
                 productForm.price.value,
-                productForm.currency.value,
-                productForm.quantity.value);
+                productForm.selectCurrency.value);
 
             for (let i = 0; i < productForm.elements.length; i++) {
                 const element = productForm.elements[i];
@@ -89,12 +89,11 @@
             }
         });
 
-        function addRow(name, price, currency, quantity) {
+        function addRow(name, price, currency) {
             let tr = document.createElement("tr");
             tr.insertAdjacentHTML("beforeend", `<td>${name}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td>${price}</td>`);
             tr.insertAdjacentHTML("beforeend", `<td>${currency}</td>`);
-            tr.insertAdjacentHTML('beforeend', `<td>${quantity}</td>`);
             productsTable.append(tr);
         }
 
