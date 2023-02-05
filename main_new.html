@@ -5,58 +5,99 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 15.1</title>
+    <title>Task 15.2</title>
     <style>
-        .form-grop {
-            margin: 4px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .form-grop label {
-            width: 75px;
+        .form-group {
+            margin: 4px 10px;
             display: inline-block;
+        }
+
+        .form-group label {
+            display: block;
+        }
+
+        [type=button] {
+            margin: 10px;
+        }
+
+        table {
+            margin: 10px
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        td,
+        th {
+            padding: 8px;
         }
     </style>
 </head>
 
 <body>
-    <form>
-        <div class="form-grop">
-            <label>Логин</label>
-            <input type="text" name="loginInput">
+    
+    <form name="productForm">
+        <div class="form-group">
+            <label for="name">Название</label>
+            <input type="text" id="name" name="name">
         </div>
-        <div class="form-grop">
-            <label>Пароль</label>
-            <input type="password" name="passwordInput">
+
+        <div class="form-group">
+            <label for="price">Цена</label>
+            <input type="text" id="price" name="price">
         </div>
-        <div class="form-grop">
-            <label>Имя</label>
-            <input type="text" name="nameInput">
+
+        <div class="form-group">
+            <label for="quantity">Количество на складе</label>
+            <input type="text" id="quantity" name="quantity">
         </div>
-        <div class="form-grop">
-            <label>Фамилия</label>
-            <input type="text" name="lastNameInput">
+
+        <div class="form-group">
+            <label for="price">Валюта</label>
+            <input type="radio" id="currency" name="currency" value="USD" checked> USD
+            <input type="radio" id="currency" name="currency" value="EUR"> EUR
         </div>
-        <div class="form-grop">
-            <input type="button" id="buttonShow" value="Отобразить значения">
-        </div>
+        <br>
+        <input id="saveButton" type="button" value="Сохранить">
     </form>
+
+    <table id="productsTable">
+
+    </table>
+
     <script>
-        let button = document.querySelector('#buttonShow');
-        let form = document.forms[0];
+        let productForm = document.forms.productForm;
+        let productsTable = document.querySelector("#productsTable");
+        let saveButton = document.querySelector("#saveButton");
 
+        saveButton.addEventListener("click", function () {
+            addRow(productForm.name.value,
+                productForm.price.value,
+                productForm.currency.value,
+                productForm.quantity.value);
 
-        button.addEventListener('click', function () {
-            show();
+            for (let i = 0; i < productForm.elements.length; i++) {
+                const element = productForm.elements[i];
+                if (element.type == "text") element.value = "";
+            }
         });
 
-
-        function show() {
-            for (let i of form) {
-                if(i.type != 'button'){
-                    console.log(i.name + ' = ' + i.value);
-                }
-            }
+        function addRow(name, price, currency, quantity) {
+            let tr = document.createElement("tr");
+            tr.insertAdjacentHTML("beforeend", `<td>${name}</td>`);
+            tr.insertAdjacentHTML("beforeend", `<td>${price}</td>`);
+            tr.insertAdjacentHTML("beforeend", `<td>${currency}</td>`);
+            tr.insertAdjacentHTML('beforeend', `<td>${quantity}</td>`);
+            productsTable.append(tr);
         }
+
     </script>
 </body>
 
