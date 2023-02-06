@@ -5,93 +5,295 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 16.3</title>
+    <title>Task 16.4</title>
     <style>
-        .form-group {
-            margin: 12px 4px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .form-group label {
-            display: block;
-        }
-
-        .form-group label.inline {
+        #userList {
+            width: 200px;
             display: inline-block;
         }
 
-        /* :valid - псевдокласс находит элементы, которые прошли валидацию */
-        input:valid {
-            border: 1px solid green;
+        #userList>li {
+            cursor: pointer;
+            list-style: none;
         }
 
-        /* :invalid - псевдокласс находит элементы, которые не прошли валидацию */
-        input:invalid {
-            border: 1px solid red;
+        #userList>li:hover {
+            background-color: orange;
+        }
+
+        #userList li.selected {
+            background-color: lightcoral;
+        }
+
+        #output {
+            display: inline-block;
+            border: 1px solid gray;
+            padding: 10px;
+            vertical-align: top;
+            margin-top: 20px;
+            width: 300px;
+            min-height: 180px;
+        }
+
+        .form-group {
+            margin-bottom: 4px;
+        }
+
+        .form-group label {
+            width: 85px;
+            display: inline-block;
+        }
+
+        .form-group input {
+            width: 200px;
         }
     </style>
 </head>
 
 <body>
-    <form>
+    <ul id="userList">
+    </ul>
+
+    <form id="output">
         <div class="form-group">
-            <label>Имя</label>
-            <input type="text" name="firstNameInput" required>
+            <label for="firstName">Имя</label>
+            <input type="text" name="firstName" id="firstName" required>
         </div>
         <div class="form-group">
-            <label>Фамилия</label>
-            <input type="text" name="lastNameInput" required>
+            <label for="lastName">Фамилия</label>
+            <input type="text" name="lastName" id="lastName" required>
         </div>
         <div class="form-group">
-            <label>Email</label>
-            <input type="email" name="emailInput" required>
-            <span id="blockEmail"></span>
+            <label for="companyName">Компания</label>
+            <input type="text" name="companyName" id="companyName" required>
         </div>
         <div class="form-group">
-            <label>Пароль</label>
-            <input type="password" name="passwordInput" required minlength="6" maxlength="16">
+            <label for="balance">Баланс</label>
+            <input type="number" name="balance" id="balance" min="1000" required>
         </div>
         <div class="form-group">
-            <label>Подтверждение пароля</label>
-            <input type="password" name="passwordConfirmInput" required minlength="6" maxlength="16">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
         </div>
         <div class="form-group">
-            <input type="checkbox" name="acceptedInput" required>
-            <label class="inline">Согласен с условиями использования</label>
+            <label for="age">Возраст</label>
+            <input type="number" name="age" id="age" min="18" required>
         </div>
-        <div class="form-group">
-            <input type="submit" value="Зарегистрироваться">
-        </div>
+        <input type="submit" value="Save" id="saveButton">
+        <input type="reset" value="Reset">
+        <input type="button" value="Delete" id="deleteButton">
     </form>
-
-
     <script>
-        const form = document.forms[0];
-        let blackList = ['admin@example.com', 'superuser@example.com', 'user@example.com'];
-        let blockMessage = document.querySelector('#blockEmail');
+        let users = [
+            {
+                balance: '1250.89',
+                age: 24,
+                name: {
+                    first: 'Golden',
+                    last: 'Clements'
+                },
+                company: 'EWAVES',
+                email: 'golden.clements@ewaves.io'
+            },
+            {
+                balance: '3637.94',
+                age: 23,
+                name: {
+                    first: 'Francis',
+                    last: 'Hebert'
+                },
+                company: 'XPLOR',
+                email: 'francis.hebert@xplor.biz'
+            },
+            {
+                balance: '1106.44',
+                age: 31,
+                name: {
+                    first: 'Hale',
+                    last: 'Cross'
+                },
+                company: 'EARTHPURE',
+                email: 'hale.cross@earthpure.us'
+            },
+            {
+                balance: '2502.43',
+                age: 25,
+                name: {
+                    first: 'Delores',
+                    last: 'Sykes'
+                },
+                company: 'ASSITIA',
+                email: 'delores.sykes@assitia.com'
+            },
+            {
+                balance: '3651.54',
+                age: 21,
+                name: {
+                    first: 'Ryan',
+                    last: 'Bolton'
+                },
+                company: 'MOLTONIC',
+                email: 'ryan.bolton@moltonic.biz'
+            },
+            {
+                balance: '1345.79',
+                age: 21,
+                name: {
+                    first: 'Carey',
+                    last: 'Schwartz'
+                },
+                company: 'UXMOX',
+                email: 'carey.schwartz@uxmox.info'
+            },
+            {
+                balance: '3261.11',
+                age: 30,
+                name: {
+                    first: 'Trevino',
+                    last: 'Mullins'
+                },
+                company: 'TERRASYS',
+                email: 'trevino.mullins@terrasys.org'
+            },
+            {
+                balance: '1659.17',
+                age: 20,
+                name: {
+                    first: 'Gilliam',
+                    last: 'Mendez'
+                },
+                company: 'ZENTHALL',
+                email: 'gilliam.mendez@zenthall.tv'
+            },
+            {
+                balance: '2340.54',
+                age: 32,
+                name: {
+                    first: 'Brewer',
+                    last: 'Vargas'
+                },
+                company: 'QIMONK',
+                email: 'brewer.vargas@qimonk.co.uk'
+            },
+            {
+                balance: '1736.91',
+                age: 24,
+                name: {
+                    first: 'Newman',
+                    last: 'Wynn'
+                },
+                company: 'VISALIA',
+                email: 'newman.wynn@visalia.name'
+            }
+        ];
 
-        form.addEventListener("submit", function (e) {
-            alert("Форма отправлена");
+        class ListService {
+            selectedData;
+            data;
+            listElement;
+
+            constructor(data, listElement, displayFn) {
+                this.data = data;
+                this.listElement = listElement;
+
+                for (let index = 0; index < data.length; index++) {
+                    const currentData = data[index];
+
+                    let li = document.createElement("li");
+                    li.textContent = displayFn(currentData);
+                    currentData.id = index;
+                    li.dataset.id = index;
+
+                    this.listElement.append(li);
+                }
+            }
+
+            select(id) {
+                this.selectedData = this.data.filter(x => x.id == id)[0];
+                this.deselectAll();
+
+                const index = this.data.indexOf(this.selectedData);
+                this.listElement.children[index].classList.add("selected");
+            }
+
+            deselectAll() {
+                for (let i = 0; i < this.listElement.children.length; i++) {
+                    const child = this.listElement.children[i];
+                    child.classList.remove("selected");
+                }
+            }
+
+            deleteSelectedItem() {
+                const index = this.data.indexOf(this.selectedData);
+                if (index != -1) {
+                    this.listElement.children[index].remove();
+                    this.data.splice(index, 1);
+                }
+            }
+        }
+
+        class UserFormService {
+            currentUser;
+            form;
+
+            constructor(form) {
+                this.form = form;
+            }
+
+            fillForm(user) {
+                this.currentUser = user;
+
+                this.form.firstName.value = user.name.first;
+                this.form.lastName.value = user.name.last;
+                this.form.companyName.value = user.company;
+                this.form.balance.value = user.balance;
+                this.form.email.value = user.email;
+                this.form.age.value = user.age;
+            }
+
+            saveForm() {
+                this.currentUser.name.first = this.form.firstName.value;
+                this.currentUser.name.last = this.form.lastName.value;
+                this.currentUser.company = this.form.companyName.value;
+                this.currentUser.balance = this.form.balance.value;
+                this.currentUser.email = this.form.email.value;
+                this.currentUser.age = this.form.age.value;
+            }
+
+            resetForm() {
+                this.form.reset();
+            }
+        }
+
+        let userList = document.querySelector("#userList");
+        let saveButton = document.querySelector("#saveButton");
+        let deleteButton = document.querySelector("#deleteButton");
+
+        let listService = new ListService(users, userList, x => x.name.first + " " + x.name.last);
+        let formService = new UserFormService(document.forms[0]);
+
+        userList.addEventListener("click", function (e) {
+            if (e.target.tagName != "LI") return;
+
+            const userNumber = e.target.dataset.id;
+            listService.select(userNumber);
+            formService.fillForm(listService.selectedData);
         });
 
-        form.passwordConfirmInput.addEventListener("input", function () {
-            if (form.passwordConfirmInput.value != form.passwordInput.value) {
-                form.passwordConfirmInput.setCustomValidity("Пароль и подтверждение пароля не совпадают.");
-                form.passwordInput.setCustomValidity("Пароль и подтверждение пароля не совпадают.");
-            }
-            else {
-                form.passwordConfirmInput.setCustomValidity(""); 
-                form.passwordInput.setCustomValidity("");
-            }
+        document.forms[0].addEventListener("submit", function (e) {
+            formService.saveForm();
+            e.preventDefault();
         });
 
-        form.emailInput.addEventListener('input', function(){
-            if(blackList.includes(form.emailInput.value)){
-                blockMessage.textContent = 'Указанный адрес невозможен';
-            }
-            else{
-                blockMessage.textContent = '';
-            }
-        })
+        deleteButton.addEventListener("click", function () {
+            listService.deleteSelectedItem();
+            formService.resetForm();
+        });
+
     </script>
 </body>
 
