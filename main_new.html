@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 16.1</title>
+    <title>Task 16.2</title>
     <style>
         .form-group {
             margin: 4px;
@@ -15,9 +15,6 @@
             width: 75px;
             display: inline-block;
         }
-        .hint{
-            display: none;
-        }
     </style>
 </head>
 
@@ -25,42 +22,19 @@
     <form>
         <div class="form-group">
             <label>Логин</label>
-            <input type="text" name="login">
-            <span class="hint" id="loginHint">Ваш логин должен состоять не менее чем из 4 символов</span>
+            <input type="text" name="login" minlength="4" required>
         </div>
         <div class="form-group">
             <label>Пароль</label>
-            <input type="password" name="password">
-            <span class="hint" id="passwordHint">Пароль должен содержать буквы, цифры и специальный символ</span>
+            <input type="password" name="password" minlength="6" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" required>
         </div>
 
         <div class="form-group">
             <input type="submit" value="Зарегистрироваться">
         </div>
     </form>
+    
     <script>
-        let form = document.forms[0];
-        let loginInput = form.login;
-        let passwordInput = form.password;
-        let loginSpan = document.querySelector('#loginHint');
-        let passwordSpan = document.querySelector('#passwordHint');
-
-        form.addEventListener('submit', function () {
-            alert(form.login.value + ' ' + form.password.value);
-        });
-        loginInput.addEventListener('focus', function(){
-            loginSpan.style.display = 'block';
-        });
-        loginInput.addEventListener('blur', function(){
-            loginSpan.style.display = 'none';
-        });
-        passwordInput.addEventListener('focus', function(){
-            passwordSpan.style.display = 'block';
-        });
-        passwordInput.addEventListener('blur', function(){
-            passwordSpan.style.display = 'none';
-        });
-
     </script>
 </body>
 
