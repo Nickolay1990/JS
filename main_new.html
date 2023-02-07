@@ -5,303 +5,261 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 17.4</title><style>
+    <title>Task 17.5</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        #userList {
-            width: 200px;
-            display: inline-block;
+        .task-list {
+            width: 500px;
         }
 
-        #userList>li {
-            cursor: pointer;
-            list-style: none;
+        #start-message {
+            margin: 10px;
         }
 
-        #userList>li:hover {
-            background-color: orange;
-        }
-
-        #userList li.selected {
-            background-color: lightcoral;
-        }
-
-        #output {
-            display: inline-block;
+        .task {
+            display: flex;
+            align-items: center;
             border: 1px solid gray;
-            padding: 10px;
-            vertical-align: top;
-            margin-top: 20px;
-            width: 300px;
-            min-height: 180px;
+            padding: 3px 8px;
+            margin: 2px 10px;
         }
 
-        .form-group {
-            margin-bottom: 4px;
+        .task p {
+            margin-left: 4px;
         }
 
-        .form-group label {
-            width: 85px;
-            display: inline-block;
+        .completed {
+            background-color: green;
+            color: white;
         }
 
-        .form-group input {
-            width: 200px;
+        .completed p {
+            text-decoration: line-through;
+        }
+
+        .input-panel {
+            width: 500px;
+            margin: 8px;
+            padding: 2px;
+        }
+
+        .input-panel button {
+            padding: 4px;
+            width: 25%;
+        }
+
+        .input-panel input {
+            height: 23px;
+            padding-left: 4px;
+            width: 68%;
         }
     </style>
 </head>
 
 <body>
-    <ul id="userList">
-    </ul>
+    <div class="input-panel">
+        <input type="text" id="task-name-input">
+        <button id="add-task-btn">Добавить задачу</button>
+    </div>
+    <div class="input-panel">
+        <button id="show-all-btn">Все</button>
+        <button id="show-not-completed-btn">Не завершенные</button>
+        <button id="delete-button">Delete</button>
+    </div>
+    <div class="task-list">
+        <p id="start-message">Нет новых задач</p>
+    </div>
 
-    <form id="output">
-        <div class="form-group">
-            <label for="firstName">Имя</label>
-            <input type="text" name="firstName" id="firstName" required>
-        </div>
-        <div class="form-group">
-            <label for="lastName">Фамилия</label>
-            <input type="text" name="lastName" id="lastName" required>
-        </div>
-        <div class="form-group">
-            <label for="companyName">Компания</label>
-            <input type="text" name="companyName" id="companyName" required>
-        </div>
-        <div class="form-group">
-            <label for="balance">Баланс</label>
-            <input type="number" name="balance" id="balance" required min="1000">
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-        </div>
-        <div class="form-group">
-            <label for="age">Возраст</label>
-            <input type="number" name="age" id="age" required min="18">
-        </div>
-        <input type="submit" value="Save" id="saveButton">
-        <input type="reset" value="Reset">
-        <input type="button" value="Delete" id="deleteButton">
-    </form>
     <script>
-        let users = [
-            {
-                balance: '1250.89',
-                age: 24,
-                name: {
-                    first: 'Golden',
-                    last: 'Clements'
-                },
-                company: 'EWAVES',
-                email: 'golden.clements@ewaves.io'
-            },
-            {
-                balance: '3637.94',
-                age: 23,
-                name: {
-                    first: 'Francis',
-                    last: 'Hebert'
-                },
-                company: 'XPLOR',
-                email: 'francis.hebert@xplor.biz'
-            },
-            {
-                balance: '1106.44',
-                age: 31,
-                name: {
-                    first: 'Hale',
-                    last: 'Cross'
-                },
-                company: 'EARTHPURE',
-                email: 'hale.cross@earthpure.us'
-            },
-            {
-                balance: '2502.43',
-                age: 25,
-                name: {
-                    first: 'Delores',
-                    last: 'Sykes'
-                },
-                company: 'ASSITIA',
-                email: 'delores.sykes@assitia.com'
-            },
-            {
-                balance: '3651.54',
-                age: 21,
-                name: {
-                    first: 'Ryan',
-                    last: 'Bolton'
-                },
-                company: 'MOLTONIC',
-                email: 'ryan.bolton@moltonic.biz'
-            },
-            {
-                balance: '1345.79',
-                age: 21,
-                name: {
-                    first: 'Carey',
-                    last: 'Schwartz'
-                },
-                company: 'UXMOX',
-                email: 'carey.schwartz@uxmox.info'
-            },
-            {
-                balance: '3261.11',
-                age: 30,
-                name: {
-                    first: 'Trevino',
-                    last: 'Mullins'
-                },
-                company: 'TERRASYS',
-                email: 'trevino.mullins@terrasys.org'
-            },
-            {
-                balance: '1659.17',
-                age: 20,
-                name: {
-                    first: 'Gilliam',
-                    last: 'Mendez'
-                },
-                company: 'ZENTHALL',
-                email: 'gilliam.mendez@zenthall.tv'
-            },
-            {
-                balance: '2340.54',
-                age: 32,
-                name: {
-                    first: 'Brewer',
-                    last: 'Vargas'
-                },
-                company: 'QIMONK',
-                email: 'brewer.vargas@qimonk.co.uk'
-            },
-            {
-                balance: '1736.91',
-                age: 24,
-                name: {
-                    first: 'Newman',
-                    last: 'Wynn'
-                },
-                company: 'VISALIA',
-                email: 'newman.wynn@visalia.name'
-            }
-        ];
 
-        class ListService {
-            selectedData;
-            data;
-            listElement;
+        /*
+        Задача, добавьте возможность удалять отдельные задачи в списке. Изменения должны сохраняться в localStorage
+        */
 
-            constructor(data, listElement, displayFn) {
-                this.data = data;
-                this.listElement = listElement;
-
-                for (let index = 0; index < data.length; index++) {
-                    const currentData = data[index];
-
-                    let li = document.createElement("li");
-                    li.textContent = displayFn(currentData);
-                    currentData.id = index; // для каждого пользователя указываем id, который совпадает с id в разметке
-                    li.dataset.id = index;
-
-                    this.listElement.append(li);
-                }
-            }
-
-            select(id) {
-                this.selectedData = this.data.filter(x => x.id == id)[0];
-                this.deselectAll();
-
-                const index = this.data.indexOf(this.selectedData);
-                this.listElement.children[index].classList.add("selected");
-            }
-
-            deselectAll() {
-                for (let i = 0; i < this.listElement.children.length; i++) {
-                    const child = this.listElement.children[i];
-                    child.classList.remove("selected");
-                }
-            }
-
-            // удаление данных из разметки и массива
-            deleteSelectedItem() {
-                const index = this.data.indexOf(this.selectedData);
-                if (index != -1) {
-                    this.listElement.children[index].remove();
-                    this.data.splice(index, 1);
-                }
+        class Task {
+            constructor(text) {
+                this.text = text;
+                this.isDone = false;
             }
         }
 
-        class UserFormService {
-            currentUser;
-            form;
+        let dataService = {
+            tasks: [],
 
-            constructor(form) {
-                this.form = form;
-            }
+            get allTasks() {
+                return this.tasks;
+            },
 
-            fillForm(user) {
-                this.currentUser = user;
+            get notCompletedTasks() {
+                return this.tasks.filter(task => task.isDone == false);
+            },
 
-                this.form.firstName.value = user.name.first;
-                this.form.lastName.value = user.name.last;
-                this.form.companyName.value = user.company;
-                this.form.balance.value = user.balance;
-                this.form.email.value = user.email;
-                this.form.age.value = user.age;
-            }
+            add(task) {
+                this.tasks.push(task);
+                this.save();
+            },
 
-            saveForm() {
-                this.currentUser.name.first = this.form.firstName.value;
-                this.currentUser.name.last = this.form.lastName.value;
-                this.currentUser.company = this.form.companyName.value;
-                this.currentUser.balance = this.form.balance.value;
-                this.currentUser.email = this.form.email.value;
-                this.currentUser.age = this.form.age.value;
-            }
+            save() {
+                localStorage.setItem("tasks", JSON.stringify(this.tasks));
+            },
 
-            // очистка формы
-            resetForm() {
-                this.form.reset();
+            open() {
+                this.tasks = JSON.parse(localStorage.getItem("tasks")) || [];
             }
         }
 
-        let userList = document.querySelector("#userList");
-        let saveButton = document.querySelector("#saveButton");
-        let deleteButton = document.querySelector("#deleteButton");
+        class TasksListView {
+            element;
+            dataService;
 
-        let listService = new ListService(users, userList, x => x.name.first + " " + x.name.last);
-        let formService = new UserFormService(document.forms[0]);
+            constructor(element) {
+                this.element = element;
+                dataService = dataService;
+            }
 
-        let storage =JSON.parse(localStorage.getItem('users'));
-        console.log(storage);
+            #drawList(tasksElements) {
+                this.element.innerHTML = "";
 
+                tasksElements.forEach(taskElement => {
+                    taskElement.createIn(this.element);
+                });
+            }
 
-        userList.addEventListener("click", function (e) {
-            if (e.target.tagName != "LI") return;
+            drawAll() {
+                let taskElements = [];
+                let tasks = dataService.allTasks;
+                if (tasks.length == 0) return;
 
-            const userNumber = e.target.dataset.id;
-            listService.select(userNumber);
-            formService.fillForm(listService.selectedData);
+                tasks.forEach(task => {
+                    taskElements.push(new TaskView(task))
+                });
+                this.#drawList(taskElements);
+            }
+
+            drawNotCompleted() {
+                let taskElements = [];
+                let tasks = dataService.notCompletedTasks;
+                if (tasks.length == 0) return;
+
+                tasks.forEach(task => {
+                    taskElements.push(new TaskView(task))
+                });
+                this.#drawList(taskElements);
+            }
+        }
+
+        class TaskView {
+            constructor(task) {
+                this.task = task;
+                this.div = null;
+            }
+
+            createIn(element) {
+                this.div = document.createElement("div");
+                this.div.classList.add("task");
+
+                let input = document.createElement("input");
+                input.addEventListener("click", this.changeState.bind(this));
+                input.type = "checkbox";
+
+                let inputDelete = document.createElement('input');
+                inputDelete.type = 'checkbox';
+                inputDelete.addEventListener('click', function () {
+                    inputDelete.classList.toggle('forDelete');
+                })
+
+                let p = document.createElement("p");
+                p.innerText = this.task.text;
+
+                this.div.append(input);
+                this.div.append(p);
+                this.div.append(inputDelete);
+
+                if (this.task.isDone) {
+                    this.div.classList.add("completed");
+                    input.checked = true;
+                }
+                element.append(this.div);
+            }
+
+            changeState(element) {
+                this.task.isDone = !this.task.isDone;
+                dataService.save();
+                this.div.classList.toggle("completed");
+            }
+        }
+        dataService.open();
+        
+
+        let taskNameInput = document.querySelector("#task-name-input");
+        let addTaskButton = document.querySelector("#add-task-btn");
+        let startMessage = document.querySelector("#start-message");
+        let showAllButton = document.querySelector("#show-all-btn");
+        let showNotCompletedButton = document.querySelector("#show-not-completed-btn");
+        let taskList = document.querySelector(".task-list");
+        let deleteButton = document.querySelector('#delete-button');
+
+        deleteButton.addEventListener('click', function (e) {
+            let forDel = document.querySelectorAll('.forDelete');
+            for (let i of forDel) {
+                i.parentElement.remove();
+                let indeficator = i.parentElement.children[1].textContent;
+                for(k of dataService.tasks){
+                    if(indeficator == k.text){
+                        let index = dataService.tasks.indexOf(k)
+                        dataService.tasks.splice(index, 1);
+
+                        dataService.save();
+                        dataService.open();
+                    }
+                }
+            }
+        })
+
+        
+        let tasksListView = new TasksListView(taskList);
+
+        addTaskButton.addEventListener("click", addTaskHandler);
+        showAllButton.addEventListener("click", showAllHandler);
+        showNotCompletedButton.addEventListener("click", showNotCompletedHandler);
+
+        window.addEventListener("load", function () {
+            tasksListView.drawAll();
         });
 
-        document.forms[0].addEventListener("submit", function (e) {
-            formService.saveForm();
-            e.preventDefault();
-            jsonUsers = JSON.stringify(users);
-            localStorage.setItem('users', jsonUsers);
-        });
+        taskNameInput.addEventListener("keydown", function (e) {
+            if (e.code == "Enter") addTaskHandler();
+        })
 
-        deleteButton.addEventListener("click", function () {
-            listService.deleteSelectedItem();
-            formService.resetForm();
-            jsonUsers = JSON.stringify(users);
-            localStorage.setItem('users', jsonUsers);
-        });
+        function addTaskHandler() {
+            if (taskNameInput.value) {
+                if (!startMessage.hidden) startMessage.hidden = true;
+
+                let newTask = new Task(taskNameInput.value);
+                dataService.add(newTask);
+                tasksListView.drawAll();
+
+                taskNameInput.value = "";
+            } else {
+                alert("введите имя задачи");
+            }
+        }
+
+        function showAllHandler() {
+            tasksListView.drawAll();
+        }
+
+        function showNotCompletedHandler() {
+            tasksListView.drawNotCompleted();
+        }
     </script>
 </body>
 
