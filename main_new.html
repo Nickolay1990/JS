@@ -5,21 +5,114 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 17.2</title>
+    <title>Task 03</title>
+
+    <style>
+        .form-group {
+            margin: 4px;
+        }
+
+        .form-group label {
+            width: 75px;
+            display: inline-block;
+        }
+        table{
+            border: 1px solid black;
+        }
+        td,
+        th {
+            padding: 8px;
+        }
+    </style>
 </head>
 
 <body>
-    <textarea rows="10" cols="30"></textarea>
+
+
+    <form name="writeForm">
+        <div class="form-group">
+            <label>Ключ</label>
+            <input type="text" name="keyInput" required>
+        </div>
+        <div class="form-group">
+            <label>Значение</label>
+            <input type="text" name="valueInput" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Запись">
+        </div>
+    </form>
+
+    <br>
+
+    <form name="readForm">
+        <div class="form-group">
+            <label>Ключ</label>
+            <input type="text" name="keyInput" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Чтение">
+        </div>
+    </form>
+    <button id="show">Show All</button>
+    <button id="clear">Clear</button>
+    <table>Local Storage</table>
+
     <script>
-        let textArea = document.querySelector('textarea');
-        let text = localStorage.getItem('text');
-        if(text){
-        textArea.innerText = text;
+        let buttonShow = document.querySelector('#show');
+        let table = document.querySelector('table');
+        let buttonclear = document.querySelector('#clear');
+
+        document.forms.writeForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const form = document.forms.writeForm;
+
+            let key = form.keyInput.value;
+            let value = form.valueInput.value;
+
+            localStorage.setItem(key, value);
+            form.reset();
+        });
+
+        document.forms.readForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const form = document.forms.readForm;
+            let key = form.keyInput.value;
+
+            let value = localStorage.getItem(key);
+            alert(value);
+        });
+
+        buttonShow.addEventListener('click', function () {
+            table.innerHTML = '';
+            for(let i = 0; i < localStorage.length; i++){
+                let key = localStorage.key(i);
+                let value = localStorage.getItem(key);
+                console.log(key, value);
+                fullTable(key, value);
+            }
+        });
+
+        buttonclear.addEventListener('click', function(){
+            localStorage.clear();
+            table.innerHTML = '';
+        })
+
+        function fullTable(key, value){
+            let tr = document.createElement('tr');
+            let tdForKey = document.createElement('td');
+            let tdForValue = document.createElement('td');
+            tr.style.border = '1px solid black';
+            tdForKey.style.border = '1px solid black';
+            tdForValue.style.border = '1px solid black';
+            tdForKey.textContent = key;
+            tdForValue.textContent = value;
+            tr.append(tdForKey);
+            tr.append(tdForValue);
+            table.append(tr);
         }
 
-        textArea.addEventListener('input', function(){
-            localStorage.setItem('text', textArea.value);
-        })
     </script>
 </body>
 
