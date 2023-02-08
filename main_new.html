@@ -5,34 +5,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 18.4</title>
+    <title>Task 18.5</title>
 </head>
 
 <body>
     <script>
-        class DivideByZeroError extends Error{
-            constructor(name){
-                super('Divide for zero imposible');
-                this.name = 'Divide by zero';
+        function operation() {
+            try{
+            console.log("Выделение ресурсов");
+            return "Результат операции";
+            }
+            finally{
+            console.log("Освобождение ресурсов");
             }
         }
-        let fall = new DivideByZeroError();
 
+        operation();
+        operation();
+        operation();
 
-
-        function divide(operand1, operand2) {
-            if(operand2 == 0) throw fall;
-            return operand1 / operand2;
-        }
-
-        try{
-        console.log(divide(10, 5));
-        console.log(divide(100, 0));
-        console.log(divide(1000, 50));
-        }
-        catch{
-            console.log('fall');
-        }
     </script>
 </body>
 
