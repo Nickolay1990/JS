@@ -5,71 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 18.3</title>
+    <title>Task 18.4</title>
 </head>
 
 <body>
     <script>
-        class Rect {
-            constructor(width, height) {
-                this.width = width;
-                this.height = height;
-                if (!width) throw new Error('width must have');
-                if (!height) throw new Error('height must have');
-            }
-
-            get width() {
-                if (this._width === undefined) {
-                    this._width = 0;
-                }
-
-                return this._width;
-            }
-
-            set width(value) {
-                if (value < 0) {
-                    throw new Error("Значение для width не может быть меньше 0");
-                } else {
-                    this._width = value;
-                }
-            }
-
-            get height() {
-                if (this._height === undefined) {
-                    this._height = 0;
-                }
-
-                return this._height;
-            }
-
-            set height(value) {
-                if (value < 0) {
-                    throw new Error("Значение для height не может быть меньше 0");
-                } else {
-                    this._height = value;
-                }
-            }
-
-            get area() {
-                if (!width) throw new Error('width must have');
-                if (!height) throw new Error('height must have');
-                return this.height * this.width;
+        class DivideByZeroError extends Error{
+            constructor(name){
+                super('Divide for zero imposible');
+                this.name = 'Divide by zero';
             }
         }
+        let fall = new DivideByZeroError();
 
 
-        try {
-            let r1 = new Rect(10);
 
-            r1.height = -10;
-            r1.width = 30;
-
-            console.log("width " + r1.width);
-            console.log("height " + r1.height);
-            console.log("area " + r1.area);
+        function divide(operand1, operand2) {
+            if(operand2 == 0) throw fall;
+            return operand1 / operand2;
         }
-        catch {
-            alert('fall');
+
+        try{
+        console.log(divide(10, 5));
+        console.log(divide(100, 0));
+        console.log(divide(1000, 50));
+        }
+        catch{
+            console.log('fall');
         }
     </script>
 </body>
