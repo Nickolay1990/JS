@@ -5,23 +5,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 19.2</title>
+    <title>Task 19.3</title>
 </head>
 
 <body>
     <button>Запустить</button>
     <script>
-        let button = document.querySelector('button');
+       let button = document.querySelector('button');
 
-        button.addEventListener('click', function () {
-            asyncOperation(i => alert(i));
-        })
+       button.addEventListener('click', function(){
+        asyncOperation().then(i => alert(i));
+       })
 
-        function asyncOperation(callback) {
-            setTimeout(function () {
-                let result = Math.floor(Math.random() * 5001);
-                callback(result);
-            }, 2000);
+        function asyncOperation() {
+            let promise = new Promise(function (resolve, reject) {
+                setTimeout(function () {
+                    let result = Math.floor(Math.random() * 5001);
+                    resolve(result);
+                }, 2000);
+            })
+            return promise;
         }
     </script>
 </body>
