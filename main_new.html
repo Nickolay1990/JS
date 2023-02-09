@@ -5,25 +5,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 18.5</title>
+    <title>Task 19.1</title>
 </head>
 
 <body>
+    <button>Скачать</button>
+    <div id="output"></div>
+
     <script>
-        function operation() {
-            try{
-            console.log("Выделение ресурсов");
-            return "Результат операции";
-            }
-            finally{
-            console.log("Освобождение ресурсов");
+        function downloadImage(url, success, error) {
+            console.log('0');
+            let image = new Image(500);
+            image.src = url;
+
+            image.onload = function () {
+                if (success && typeof success == "function")
+                    success(image);
+            };
+
+            image.onerror = function (e) {
+                if (error && typeof error == "function")
+                    error(new Error("Не удалось загрузить изображение " + this.src));
             }
         }
 
-        operation();
-        operation();
-        operation();
+        function success1(image){
+            console.log('1');
+            div.append(image);
+        }
 
+        function error1(er){
+            console.log('2');
+            throw er;
+        }
+
+        let button = document.querySelector('button');
+        let div = document.querySelector('div');
+        button.addEventListener('click', function(){
+            downloadImage('https://images-assets.nasa.gov/image/PIA16239/PIA16239~orig.jpg', success1, error1);
+        })
     </script>
 </body>
 
