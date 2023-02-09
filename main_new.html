@@ -5,26 +5,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 19.3</title>
+    <title>Task 19.4</title>
 </head>
 
 <body>
-    <button>Запустить</button>
+    <button>Скачать</button>
     <script>
-       let button = document.querySelector('button');
+        document.querySelector('button').addEventListener('click', function(){
+            let promises = [
+            download(),
+            download(),
+            download(),
+            download(),
+            download()
+            ];
+            Promise.all(promises).then(() => console.log("Всей файлы скачаны"));
+        })
 
-       button.addEventListener('click', function(){
-        asyncOperation().then(i => alert(i));
-       })
-
-        function asyncOperation() {
-            let promise = new Promise(function (resolve, reject) {
-                setTimeout(function () {
-                    let result = Math.floor(Math.random() * 5001);
-                    resolve(result);
-                }, 2000);
-            })
-            return promise;
+        function download() {
+            return new Promise(function (resolve, reject) {
+                let random = Math.floor(Math.random() * 5001);
+                setTimeout(() => resolve("downloaded data"), random);
+            });
         }
     </script>
 </body>
