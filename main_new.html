@@ -5,28 +5,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 19.4</title>
+    <title>Task 19.5</title>
 </head>
 
 <body>
-    <button>Скачать</button>
+    <button>Загрузить</button>
+    <br>
+    <br>
     <script>
-        document.querySelector('button').addEventListener('click', function(){
-            let promises = [
-            download(),
-            download(),
-            download(),
-            download(),
-            download()
-            ];
-            Promise.all(promises).then(() => console.log("Всей файлы скачаны"));
-        })
+        document.querySelector("button").addEventListener("click", function () {
+            let url1 = "https://images-assets.nasa.gov/image/PIA16239/PIA16239~orig.jpg";
+            let url2 = "https://images-assets.nasa.gov/image/PIA22312/PIA22312~orig.jpg-FALL!!!!";//FALL
+            let url3 = "https://images-assets.nasa.gov/image/PIA04591/PIA04591~orig.jpg";
 
-        function download() {
-            return new Promise(function (resolve, reject) {
-                let random = Math.floor(Math.random() * 5001);
-                setTimeout(() => resolve("downloaded data"), random);
+           
+            downloadImage(url1)                     
+                .then(image => {                    
+                    document.body.append(image);    
+                    return downloadImage(url2);     
+                })
+                .then(image => {                    
+                    document.body.append(image);
+                    return downloadImage(url3);
+                })
+                .then(image => {
+                    document.body.append(image);
+                })
+                .catch(error => alert(error.message));
+
+        });
+
+        function downloadImage(url) {
+            let promise = new Promise(function (resolve, reject) {
+                let image = new Image(500);
+                image.src = url;
+
+                image.onload = function () {
+                    resolve(image);
+                };
+
+                image.onerror = function (e) {
+                    reject(new Error("Не удалось загрузить изображение " + this.src));
+                }
             });
+
+            return promise;
         }
     </script>
 </body>
