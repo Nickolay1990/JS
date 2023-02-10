@@ -5,87 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 20.2</title>
-    <style>
-        div {
-            display: flex;
-        }
-    </style>
+    <title>Task 20.3</title>
 </head>
 
 <body>
-    <form>
-        <div>
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title"><br>
-            <label for="body">Body</label>
-            <input type="text" id="body" name="body">
-        </div>
-        <div>
-            <button>Check</button>
-        </div>
-    </form>
     <script>
-        /*
-        Задание:
-        Напишите сценарий, который будет обновлять сущность post со свойствами
-        id: 1,
-        title: 'foo',
-        body: 'bar',
-        userId: 1,
-
-        Создайте форму с полем ввода для значения свойства title и полем ввода для значения свойства body
-
-        Значения для свойств title и body получите от пользователя
-        Значения id и userId должны остаться равными 1 и выводить их в форме не нужно.
-        При загрузке сценария заполните форму данными получеными при обработке GET запроса на https://jsonplaceholder.typicode.com/posts/1
-
-        адрес для отправки запроса
-        https://jsonplaceholder.typicode.com/posts/1
-
-        для обновления сущности воспользуйтесь PUT запросом https://jsonplaceholder.typicode.com/posts/1. Обработайте ответ
-        и выведите информацию о ошибке или об успешно завершенной операции.
-        */
-        let form = document.forms[0];
-        let url = 'https://jsonplaceholder.typicode.com/posts/1';
-        let post = {
-            id: 1,
-            title: 'foo',
-            body: 'bar',
-            userId: 1,
-        };
-        let button = document.querySelector('button');
-
-        button.addEventListener('click', function(){
-            alert(titleInput)
-        })
-
-
+        let url = 'https://jsonplaceholder.typicode.com/photos';
 
         fetch(url)
-            .then(respone => respone.json())
-            .then(json => {
-                form.title.value = json.title;
-                form.body.value = json.body;
-                post.body = json.body;
-                post.title = json.title;
-                console.log(post);
-            })
-
-        fetch(url, {
-            method: 'PUT',
-            body: JSON.stringify(post)
-        })
-        .then(response => {
-            if(response.ok){
-                console.log(response.json() + ' saved');
+        .then(response => response.json())
+        .then(json => {
+            for(let i = 0; i < json.length; i++){
+                let img = document.createElement('img');
+                img.src = json[i].thumbnailUrl;
+                document.body.append(img);
             }
-            else{
-                console.error(response.status + response.message);
             }
-        })
-
-
+        )
     </script>
 </body>
 
