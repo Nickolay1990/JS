@@ -5,52 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 19.5</title>
+    <title>Task 20.1</title>
 </head>
 
 <body>
-    <button>Загрузить</button>
-    <br>
-    <br>
+    <button id="button1">Запрос</button>
+    <div id="output"></div>
     <script>
-        document.querySelector("button").addEventListener("click", function () {
-            let url1 = "https://images-assets.nasa.gov/image/PIA16239/PIA16239~orig.jpg";
-            let url2 = "https://images-assets.nasa.gov/image/PIA22312/PIA22312~orig.jpg-FALL!!!!";//FALL
-            let url3 = "https://images-assets.nasa.gov/image/PIA04591/PIA04591~orig.jpg";
+        /*
+        Задание:
+        Добавьте обработку статус кодов ошибок на стороне сервера и на стороне клиента
+        для сетевого запроса, который выполняется при нажатии на кнопку "Запрос" 
+        */
+        let button1 = document.querySelector("#button1");
+        let output = document.querySelector("#output");
+        let url = "https://jsonplaceholder.typicode.com/todos/11111";
 
-           
-            downloadImage(url1)                     
-                .then(image => {                    
-                    document.body.append(image);    
-                    return downloadImage(url2);     
-                })
-                .then(image => {                    
-                    document.body.append(image);
-                    return downloadImage(url3);
-                })
-                .then(image => {
-                    document.body.append(image);
-                })
-                .catch(error => alert(error.message));
-
-        });
-
-        function downloadImage(url) {
-            let promise = new Promise(function (resolve, reject) {
-                let image = new Image(500);
-                image.src = url;
-
-                image.onload = function () {
-                    resolve(image);
-                };
-
-                image.onerror = function (e) {
-                    reject(new Error("Не удалось загрузить изображение " + this.src));
+        button1.addEventListener("click", function () {
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    else{
+                        throw Error('fall ' + response.status);
+                    }
                 }
-            });
-
-            return promise;
-        }
+                )
+                .then(json => {
+                    output.innerHTML = "";
+                    output.innerHTML += "<br>id: " + json.id;
+                    output.innerHTML += "<br>user id: " + json.userId;
+                    output.innerHTML += "<br>title: " + json.title;
+                    output.innerHTML += "<br>completed: " + json.completed;
+                })
+                .catch(error => console.log(error.message));
+        });
     </script>
 </body>
 
