@@ -5,23 +5,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 20.3</title>
+    <title>Task 20.4</title>
+    <style>
+        table{
+            border: 1px solid gray;
+        }
+        tr, td{
+            border: 1px solid gray;
+        }
+    </style>
 </head>
 
 <body>
+    <table></table>
     <script>
-        let url = 'https://jsonplaceholder.typicode.com/photos';
+        /*
+        Задание:
+        Напишите сценарий, который выполняет GET запрос по адресу https://jsonplaceholder.typicode.com/todos
+        И выводит содержимое ответа в виде таблицы.
+        */
+        let url = 'https://jsonplaceholder.typicode.com/todos';
+        let table = document.querySelector('table');
 
         fetch(url)
-        .then(response => response.json())
-        .then(json => {
-            for(let i = 0; i < json.length; i++){
-                let img = document.createElement('img');
-                img.src = json[i].thumbnailUrl;
-                document.body.append(img);
+            .then(response => response.json())
+            .then(json => forTable(json))
+
+
+        function forTable(array) {
+            array.forEach(obj => forTr(obj));
+        }
+
+        function forTr(element){
+            let tr = document.createElement('tr');
+            for(let i in element){
+                let td = document.createElement('td');
+                td.textContent = i + ' = ' + element[i];
+                tr.append(td);
             }
-            }
-        )
+            table.append(tr);
+        }
+
+
     </script>
 </body>
 
